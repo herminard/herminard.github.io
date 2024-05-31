@@ -14,12 +14,22 @@
             <p><a href="https://linkedin.com/in/alexandre-levesque" target="_blank">LinkedIn</a></p>
         </header>
         
-        <section>
+        <nav>
+            <ul class="index">
+                <li><a href="#sommaire">Sommaire</a></li>
+                <li><a href="#competences">Compétences Clés</a></li>
+                <li><a href="#informatique">Connaissances Informatiques</a></li>
+                <li><a href="#experience">Expérience Professionnelle</a></li>
+                <li><a href="#formation">Formation</a></li>
+            </ul>
+        </nav>
+        
+        <section id="sommaire">
             <h2>Sommaire</h2>
             <p>Avec plus de vingt ans d’expérience en art de la scène, j’ai eu l’opportunité de gérer de nombreux projets d’envergure. Mon leadership me permet de diriger efficacement une équipe et d’assurer le bon déroulement de divers évènements. Je souhaite continuer à développer mon savoir-faire et à parfaire mes connaissances dans ce domaine.</p>
         </section>
         
-        <section>
+        <section id="competences">
             <h2>Compétences Clés</h2>
             <ul>
                 <li>Gestion d’équipes de travail multifonctionnelles</li>
@@ -32,7 +42,7 @@
             </ul>
         </section>
         
-        <section>
+        <section id="informatique">
             <h2>Connaissances Informatiques</h2>
             <ul>
                 <li>Excel</li>
@@ -43,7 +53,7 @@
             </ul>
         </section>
         
-        <section>
+        <section id="experience">
             <h2>Expérience Professionnelle</h2>
             <div class="job">
                 <h3>Chargé de Projet</h3>
@@ -109,7 +119,7 @@
             </div>
         </section>
         
-        <section>
+        <section id="formation">
             <h2>Formation</h2>
             <ul>
                 <li>Gestion de Projet, 2024 | Cégep Garneau</li>
@@ -124,4 +134,102 @@
     </div>
 </body>
 </html>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2em;
+}
+
+header p {
+    margin: 5px 0;
+}
+
+header a {
+    color: #3498db;
+    text-decoration: none;
+}
+
+nav {
+    margin-bottom: 20px;
+}
+
+nav ul.index {
+    list-style-type: none;
+    padding: 0;
+    text-align: center;
+}
+
+nav ul.index li {
+    display: inline;
+    margin: 0 10px;
+}
+
+nav ul.index a {
+    text-decoration: none;
+    color: #3498db;
+    font-weight: bold;
+}
+
+nav ul.index a:hover {
+    text-decoration: underline;
+}
+
+section {
+    margin-bottom: 20px;
+}
+
+section h2 {
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+}
+
+ul {
+    list-style-type: disc;
+    padding-left: 20px;
+}
+
+ul li {
+    margin-bottom: 5px;
+}
+
+.job {
+    margin-bottom: 20px;
+}
+
+.job h3 {
+    margin: 0;
+    font-size: 1.2em;
+    color: #333;
+}
+
+.job p {
+    margin: 5px 0;
+    font-style: italic;
+}
+
+.job ul {
+    margin-top: 5px;
+}
+
 
