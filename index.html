@@ -5,162 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CV d'Alexandre Lévesque</title>
     <style>
-        .parallax {
-            background-image: url('img_parallax.jpg');
-            height: 500px;
-            background-attachment: fixed;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-        }
-
-        @keyframes blueGradient {
-            0% { background-color: #0000FF; }
-            25% { background-color: #4169E1; }
-            50% { background-color: #1E90FF; }
-            75% { background-color: #00BFFF; }
-            100% { background-color: #87CEEB; }
-        }
-
-        .animated-text { 
-            width: 100%; 
-            animation-name: blueGradient; 
-            animation-duration: 10s; 
-            animation-iteration-count: infinite; 
-            animation-direction: alternate; 
-            text-align: center;
-            padding: 10px 0;
-            font-size: 2em;
-            color: white;
-            font-family: 'Georgia', serif;
-        }
-
-        .slide-in-text { 
-            width: 100%; 
-            margin-left: 100%; 
-            animation: slideIn 2s forwards; 
-            text-align: center;
-            padding: 10px 0;
-            font-size: 2em;
-            color: black;
-            font-family: 'Georgia', serif;
-        }
-
-        body {
-            font-family: 'Georgia', serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-        }
-
-        .container {
-            width: 80%;
-            margin: 0 auto;
-            background-color: #fff;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            margin-top: 20px;
-        }
-
-        header {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        header h1 {
-            margin: 0;
-            font-size: 2em;
-        }
-
-        header p {
-            margin: 5px 0;
-        }
-
-        header a {
-            color: #3498db;
-            text-decoration: none;
-        }
-
-        nav {
-            margin-bottom: 20px;
-        }
-
-        nav ul.index {
-            list-style-type: none;
-            padding: 0;
-            text-align: center;
-        }
-
-        nav ul.index li {
-            display: inline;
-            margin: 0 10px;
-        }
-
-        nav ul.index a {
-            text-decoration: none;
-            color: #3498db;
-            font-weight: bold;
-        }
-
-        nav ul.index a:hover {
-            text-decoration: underline;
-        }
-
-        section {
-            margin-bottom: 20px;
-        }
-
-        section h2 {
-            border-bottom: 2px solid #3498db;
-            padding-bottom: 5px;
-            margin-bottom: 10px;
-        }
-
-        ul {
-            list-style-type: disc;
-            padding-left: 20px;
-        }
-
-        ul li {
-            margin-bottom: 5px;
-        }
-
-        .job {
-            margin-bottom: 20px;
-        }
-
-        .job h3 {
-            margin: 0;
-            font-size: 1.2em;
-            color: #333;
-        }
-
-        .job p {
-            margin: 5px 0;
-            font-style: italic;
-        }
-
-        .job ul {
-            margin-top: 5px;
-        }
-
-        .lang-button {
-            margin: 10px;
-            padding: 10px 20px;
-            font-size: 1em;
-            cursor: pointer;
-        }
+        /* Styles CSS ici */
     </style>
     <script>
-        function switchLanguage(lang) {
-            document.querySelectorAll('.lang').forEach(function(element) {
-                if (element.classList.contains(lang)) {
-                    element.style.display = 'block';
-                } else {
-                    element.style.display = 'none';
-                }
-            });
-        }
+        /* JavaScript ici */
     </script>
 </head>
 <body>
@@ -182,13 +30,13 @@
         </section>
         
         <section id="competences">
-            <h2>Key Competencies</h2>
+            <h2>Compétences Clés / Key Competencies</h2>
             <ul class="lang fr">
                 <li>Gestion d’équipes de travail multifonctionnelles</li>
-                <li>Excellentes capacités de planification des priorités et d’organisation</li>
-                <li>Communication fluide en français et en anglais</li>
-                <li>Sens relationnel et interpersonnel exceptionnel</li>
-                <li>Connaissance des protocoles de communication pour le contrôle des éclairages</li>
+                <li>Bonne capacité de planification des priorités et d’organisation</li>
+                <li>Communication autant en français qu’en anglais</li>
+                <li>Excellent sens relationnel et interpersonnel</li>
+                <li>Connaissance des protocoles de communication servant au contrôle des éclairages</li>
                 <li>Tenue d’inventaire, entretien et réparation d’équipements</li>
                 <li>Installation, configuration et opération d’équipement d’éclairage</li>
             </ul>
@@ -197,7 +45,70 @@
                 <li>Excellent priority planning and organizational skills</li>
                 <li>Fluent communication in French and English</li>
                 <li>Exceptional interpersonal and relational skills</li>
-                <li>Knowledge of communication protocols for lighting control</li
+                <li>Knowledge of communication protocols for lighting control</li>
+                <li>Inventory management, equipment maintenance, and repair</li>
+                <li>Installation, configuration, and operation of lighting equipment</li>
+            </ul>
+        </section>
+
+        <section id="informatique">
+            <h2>Connaissances Informatiques / Computer Skills</h2>
+            <ul class="lang fr">
+                <li>Excel</li>
+                <li>Suite Office</li>
+                <li>Dynamic 365</li>
+                <li>Saleforce</li>
+                <li>CAD</li>
+            </ul>
+            <ul class="lang en" style="display:none;">
+                <li>Excel</li>
+                <li>Office Suite</li>
+                <li>Dynamic 365</li>
+                <li>Salesforce</li>
+                <li>CAD</li>
+            </ul>
+        </section>
+        
+        <section id="experience">
+            <h2>Expérience Professionnelle / Professional Experience</h2>
+            <div class="job">
+                <h3>Charge de projet / Project Manager</h3>
+                <p><em>2006 – présent / Present | Solotech</em></p>
+                <ul>
+                    <li>Harry Styles Love On Tour, Chef LX (2021-2023)</li>
+                    <li>The Glorious Sons, Chef LX (2020)</li>
+                    <li>Mumford and Sons Delta Tour (2019)</li>
+                    <li>Zedd Orbit Tour (2018)</li>
+                    <li>Chance the Rapper Be Encouraged Tour (2017)</li>
+                    <li>Michael Jackson Immortal Tour (2014)</li>
+                    <li>Et bien plus...</li>
+                </ul>
+            </div>
+            <!-- Ajoutez ici les autres expériences professionnelles -->
+        </section>
+        
+        <section id="formation">
+            <h2>Formation / Education</h2>
+            <ul class="lang fr">
+                <li>Gestion de Projet, 2024 | Cégep Garneau</li>
+                <li>Certification Travail en Hauteur, 2020 | Groupe ACCiSST</li>
+                <li>O.S.H.A 30 H Safety and Health Act of 1970, 2001</li>
+                <li>Attestation d’Études Collégiales (AEC) Production d’Événements Culturels et Corporatifs, 2000 | École du Show-Business</li>
+                <li>Transport de Matières Dangereuses, 1999 | ONYX Industries</li>
+                <li>S.I.M.D.U.T. CSST Construction, 1999 | Polyvalente de Jonquière</li>
+                <li>Diplôme d’Études Secondaires, 1998 | Polyvalente Arvida</li>
+            </ul>
+            <ul class="lang en" style="display:none;">
+                <li>Project Management, 2024 | Cégep Garneau</li>
+                <li>Working at Heights Certification, 2020 | Groupe ACCiSST</li>
+                <li>O.S.H.A 30 H Safety and Health Act of 1970, 2001</li>
+                <li>Attestation of Collegial Studies (AEC) Cultural and Corporate Events Production, 2000 | School of Show-Business</li>
+                <li>Dangerous Goods Transportation, 1999 | ONYX Industries</li>
+                <li>S.I.M.D.U.T. CSST Construction, 1999 | Polyvalente de Jonquière</li>
+                <li>High School Diploma, 1998 | Polyvalente Arvida</li>
+            </ul>
+        </section
+
 
 
 
