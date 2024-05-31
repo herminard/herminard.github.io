@@ -1,10 +1,18 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CV d'Alexandre Lévesque</title>
+    <title>Alexandre Lévesque's CV</title>
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+
         .parallax {
             background-image: url('img_parallax.jpg');
             height: 500px;
@@ -14,43 +22,24 @@
             background-size: cover;
         }
 
-        @keyframes blueGradient {
-            0% { background-color: #0000FF; }
-            25% { background-color: #4169E1; }
-            50% { background-color: #1E90FF; }
-            75% { background-color: #00BFFF; }
-            100% { background-color: #87CEEB; }
+        header {
+            margin-top: 50px;
+            color: #333;
         }
 
-        .animated-text { 
-            width: 100%; 
-            animation-name: blueGradient; 
-            animation-duration: 10s; 
-            animation-iteration-count: infinite; 
-            animation-direction: alternate; 
-            text-align: center;
-            padding: 10px 0;
-            font-size: 2em;
-            color: white;
-            font-family: 'Georgia', serif;
+        header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
         }
 
-        .slide-in-text { 
-            width: 100%; 
-            margin-left: 100%; 
-            animation: slideIn 2s forwards; 
-            text-align: center;
-            padding: 10px 0;
-            font-size: 2em;
-            color: black;
-            font-family: 'Georgia', serif;
+        header p {
+            margin: 5px 0;
         }
 
-        body {
-            font-family: 'Georgia', serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
+        header a {
+            color: #3498db;
+            text-decoration: none;
+            margin: 0 10px;
         }
 
         .container {
@@ -62,58 +51,16 @@
             margin-top: 20px;
         }
 
-        header {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        header h1 {
-            margin: 0;
-            font-size: 2em;
-        }
-
-        header p {
-            margin: 5px 0;
-        }
-
-        header a {
-            color: #3498db;
-            text-decoration: none;
-        }
-
-        nav {
-            margin-bottom: 20px;
-        }
-
-        nav ul.index {
-            list-style-type: none;
-            padding: 0;
-            text-align: center;
-        }
-
-        nav ul.index li {
-            display: inline;
-            margin: 0 10px;
-        }
-
-        nav ul.index a {
-            text-decoration: none;
-            color: #3498db;
-            font-weight: bold;
-        }
-
-        nav ul.index a:hover {
-            text-decoration: underline;
-        }
-
         section {
             margin-bottom: 20px;
+            text-align: left;
         }
 
         section h2 {
             border-bottom: 2px solid #3498db;
             padding-bottom: 5px;
             margin-bottom: 10px;
+            font-size: 1.5em;
         }
 
         ul {
@@ -124,44 +71,7 @@
         ul li {
             margin-bottom: 5px;
         }
-
-        .job {
-            margin-bottom: 20px;
-        }
-
-        .job h3 {
-            margin: 0;
-            font-size: 1.2em;
-            color: #333;
-        }
-
-        .job p {
-            margin: 5px 0;
-            font-style: italic;
-        }
-
-        .job ul {
-            margin-top: 5px;
-        }
-
-        .lang-button {
-            margin: 10px;
-            padding: 10px 20px;
-            font-size: 1em;
-            cursor: pointer;
-        }
     </style>
-    <script>
-        function switchLanguage(lang) {
-            document.querySelectorAll('.lang').forEach(function(element) {
-                if (element.classList.contains(lang)) {
-                    element.style.display = 'block';
-                } else {
-                    element.style.display = 'none';
-                }
-            });
-        }
-    </script>
 </head>
 <body>
     <div class="parallax"></div>
@@ -169,25 +79,79 @@
     <div class="container">
         <header>
             <h1>Alexandre Lévesque</h1>
-            <p>Téléphone : (418) 933-1446 | Courriel : <a href="mailto:alexandrelevesque100@hotmail.com">alexandrelevesque100@hotmail.com</a></p>
-            <p><a href="https://www.linkedin.com/in/alexandre-levesque-05b12a19/" target="_blank">LinkedIn</a></p>
-            <button class="lang-button" onclick="switchLanguage('fr')">Français</button>
-            <button class="lang-button" onclick="switchLanguage('en')">English</button>
+            <p>Phone: (418) 933-1446 | Email: <a href="mailto:alexandrelevesque100@hotmail.com">alexandrelevesque100@hotmail.com</a></p>
+            <p>
+                <a href="https://www.linkedin.com/in/alexandre-levesque-05b12a19/" target="_blank">LinkedIn</a>
+                <a href="https://www.instagram.com/alexandrelevesque/" target="_blank">Instagram</a>
+            </p>
         </header>
         
-        <section id="sommaire">
-            <h2>Sommaire</h2>
-            <p class="lang fr">Avec plus de vingt ans d’expérience en art de la scène, j’ai eu l’opportunité de gérer de nombreux projets d’envergure. Mon leadership me permet de diriger efficacement une équipe et d’assurer le bon déroulement de divers évènements. Je souhaite continuer à développer mon savoir-faire et à parfaire mes connaissances dans ce domaine.</p>
-            <p class="lang en" style="display:none;">With over twenty years of experience in performing arts, I have had the opportunity to manage numerous large-scale projects. My leadership allows me to effectively lead a team and ensure the smooth running of various events. I wish to continue developing my skills and expanding my knowledge in this field.</p>
+        <section id="summary">
+            <h2>Summary</h2>
+            <p>With over twenty years of experience in performing arts, I have managed numerous large-scale projects. My leadership skills enable me to effectively lead teams and ensure the successful execution of various events. I am dedicated to continuous learning and improvement within this field.</p>
         </section>
         
-        <section id="competences">
-            <h2>Key Competencies</h2>
-            <ul class="lang fr">
-                <li>Gestion d’équipes de travail multifonctionnelles</li>
-                <li>Excellentes capacités de planification des priorités et d’organisation</li>
-                <li>Communication fluide en français et en anglais</li>
-                <li>Sens relationnel et interpersonnel exceptionnel</li>
-                <li>Connaissance des protocoles de communication pour le contrôle des éclairages</li>
-                <li>Tenue d’inventaire, entretien et réparation d’équipements</li>
-                <li>Installation, configuration et opération d’équipement d’éclairage
+        <section id="skills">
+            <h2>Key Skills</h2>
+            <ul>
+                <li>Management of multifunctional work teams</li>
+                <li>Excellent priority planning and organizational skills</li>
+                <li>Fluent communication in English and French</li>
+                <li>Exceptional interpersonal and relational skills</li>
+                <li>Knowledge of communication protocols for lighting control</li>
+                <li>Inventory management, maintenance, and repair of equipment</li>
+                <li>Installation, configuration, and operation of lighting equipment</li>
+            </ul>
+        </section>
+
+        <section id="computer-skills">
+            <h2>Computer Skills</h2>
+            <ul>
+                <li>Excel</li>
+                <li>Microsoft Office Suite</li>
+                <li>Dynamic 365</li>
+                <li>Salesforce</li>
+                <li>CAD</li>
+            </ul>
+        </section>
+
+        <section id="professional-experience">
+            <h2>Professional Experience</h2>
+            <div class="job">
+                <h3>Project Manager</h3>
+                <p>Solotech | 2006 - Present</p>
+                <ul>
+                    <li>Harry Styles Love on Tour Head LX 2021-2023</li>
+                    <li>The Glorious Sons Head LX 2020</li>
+                    <li>Mumford and Sons Delta Tour 2019</li>
+                    <li>Zedd Orbit Tour 2018</li>
+                    <li>Chance the Rapper Be Encouraged Tour 2017</li>
+                    <li>Michael Jackson Immortal Tour 2014</li>
+                    <li>And many more...</li>
+                </ul>
+            </div>
+            
+            <div class="job">
+                <h3>Chief Electrician/Lighting Designer</h3>
+                <p>Various Contracts | 2006 - 2009</p>
+                <ul>
+                    <li>Solotech</li>
+                    <li>IATSE Local 523</li>
+                    <li>Inter Scene</li>
+                </ul>
+            </div>
+
+            <!-- Other job experiences can be added similarly -->
+        </section>
+
+        <section id="education">
+            <h2>Education</h2>
+            <ul>
+                <li>Project Management - Cégep Garneau, 2024</li>
+                <li>High School Diploma - Polyvalente Arvida, 1998</li>
+            </ul>
+        </section>
+    </div>
+</body>
+</html>
+
