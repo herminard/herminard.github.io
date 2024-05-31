@@ -15,21 +15,18 @@
             background-size: cover;
         }
 
-        @keyframes example {
-            from { background-color: red; } 
-            to { background-color: yellow; } 
-        }
-
-        @keyframes slideIn { 
-            from { margin-left: 100%; } 
-            to { margin-left: 0%; } 
+        @keyframes blueGradient {
+            0% { background-color: #0000FF; }
+            25% { background-color: #4169E1; }
+            50% { background-color: #1E90FF; }
+            75% { background-color: #00BFFF; }
+            100% { background-color: #87CEEB; }
         }
 
         .animated-text { 
             width: 100%; 
-            background-color: red; 
-            animation-name: example; 
-            animation-duration: 4s; 
+            animation-name: blueGradient; 
+            animation-duration: 10s; 
             animation-iteration-count: infinite; 
             animation-direction: alternate; 
             text-align: center;
@@ -153,7 +150,7 @@
     <div class="parallax"></div>
 
     <h1 class="animated-text">REAL MAN OF GENIUS</h1> 
-    <h1 class="slide-in-text">A real man makes his own luck.</h1>
+    <h1 class="slide-in-text">Slide-in Text Animation</h1>
 
     <div class="container">
         <header>
@@ -208,48 +205,5 @@
                 <p><em>2006 – Présent | Solotech</em></p>
                 <ul>
                     <li>Harry Styles Love On Tour, Chef LX (2021-2023)</li>
-                    <li>The Glorious Sons, Chef LX (2020)</li>
-                    <li>Mumford and Sons Delta Tour (2019)</li>
-                    <li>Zedd Orbit Tour (2018)</li>
-                    <li>Chance the Rapper Be Encouraged Tour (2017)</li>
-                    <li>Michael Jackson Immortal Tour (2014)</li>
-                    <li>Et bien plus...</li>
-                </ul>
-            </div>
-            <div class="job">
-                <h3>Chef Électrique/Éclairagiste</h3>
-                <p><em>2006 – 2009</em></p>
-                <p>Travail à contrat pour diverses compagnies, dont :</p>
-                <ul>
-                    <li>Solotech</li>
-                    <li>Iatse Local 523</li>
-                    <li>Inter Scène</li>
-                </ul>
-            </div>
-            <div class="job">
-                <h3>Éclairagiste</h3>
-                <p><em>2005 – 2006 | Travailleur autonome</em></p>
-                <p>Contrats pour diverses compagnies, dont :</p>
-                <ul>
-                    <li>Prospect (Place des Arts)</li>
-                    <li>Définition (Medley)</li>
-                    <li>Production Grand Bambou (Métropolis, Spectrum, Festival de Jazz, Francofolies)</li>
-                </ul>
-            </div>
-            <div class="job">
-                <h3>Chéf Éclairagiste</h3>
-                <p><em>2004 – 2005 | Cabaret la Saguenéenne</em></p>
-                <ul>
-                    <li>Responsable du bon fonctionnement et de l’entretien du cabaret</li>
-                    <li>Réparation et entretien de l’équipement</li>
-                    <li>Opération de console numérique</li>
-                    <li>Programmation d’éclairage informatisé</li>
-                </ul>
-            </div>
-            <div class="job">
-                <h3>Éclairagiste</h3>
-                <p><em>2003 – 2005 | Travailleur autonome</em></p>
-                <p>Contrats pour diverses compagnies, dont :</p>
-                <ul>
-                    <li>LSM
+
 
