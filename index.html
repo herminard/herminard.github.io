@@ -1,654 +1,195 @@
-<style>
-html {
-height: 100%;
-}
-
-body {
-min-height: 100%;
-font-family: 'Advent Pro', sans-serif;
-font-weight: 500;
-padding: 3.75em 1.875em; /* 60 30 */
-}
-
-strong {
-font-weight: 700;
-}
-
-#wrapper {
-width: 30em; /* 480 */
-height: 8.75em; /* 140 */
-position: absolute;
-top: 50%;
-left: 50%;
-margin: -4.375em 0 0 -15em; /* 70 240 */
-}
-
-/*
-PLAYER
-*/
-
-.audioplayer {
-height: 2.5em; /* 40 */
-color: #fff;
-text-shadow: 1px 1px 0 #000;
-border: 1px solid #222;
-position: relative;
-z-index: 1;
-background: #333;
-}
-
-/* mini mode (fallback) */
-
-.audioplayer-mini {
-width: 2.5em; /* 40 */
-margin: 0 auto;
-}
-
-/* player elements: play/pause and volume buttons, played/duration timers, progress bar of loaded/played */
-
-.audioplayer > div {
-position: absolute;
-}
-
-
-/* play/pause button */
-
-.audioplayer-playpause {
-width: 2.5em; /* 40 */
-height: 100%;
-text-align: left;
-text-indent: -9999px;
-cursor: pointer;
-z-index: 2;
-top: 0;
-left: 0;
-}
-
-.audioplayer:not(.audioplayer-mini) .audioplayer-playpause {
-border-right: 1px solid #555;
-border-right-color: rgba( 255, 255, 255, .1 );
-}
-
-.audioplayer-mini .audioplayer-playpause {
-width: 100%;
-}
-
-.audioplayer-playpause:hover,
-.audioplayer-playpause:focus {
-background-color: #222;
-}
-
-.audioplayer-playpause a {
-display: block;
-}
-
-.audioplayer-stopped .audioplayer-playpause a {
-width: 0;
-height: 0;
-border: 0.5em solid transparent; /* 8 */
-border-right: none;
-border-left-color: #fff;
-content: '';
-position: absolute;
-top: 50%;
-left: 50%;
-margin: -0.5em 0 0 -0.25em; /* 8 4 */
-}
-
-.audioplayer-playing .audioplayer-playpause a {
-width: 0.75em; /* 12 */
-height: 0.75em; /* 12 */
-position: absolute;
-top: 50%;
-left: 50%;
-margin: -0.375em 0 0 -0.375em; /* 6 */
-}
-
-.audioplayer-playing .audioplayer-playpause a:before,
-.audioplayer-playing .audioplayer-playpause a:after {
-width: 40%;
-height: 100%;
-background-color: #fff;
-content: '';
-position: absolute;
-top: 0;
-}
-
-.audioplayer-playing .audioplayer-playpause a:before {
-left: 0;
-}
-
-.audioplayer-playing .audioplayer-playpause a:after {
-right: 0;
-}
-
-
-/* timers */
-
-.audioplayer-time {
-width: 4.375em; /* 70 */
-height: 100%;
-line-height: 2.375em; /* 38 */
-text-align: center;
-z-index: 2;
-top: 0;
-}
-
-.audioplayer-time-current {
-border-left: 1px solid #111;
-border-left-color: rgba( 0, 0, 0, .25 );
-left: 2.5em; /* 40 */
-}
-
-.audioplayer-time-duration {
-border-right: 1px solid #555;
-border-right-color: rgba( 255, 255, 255, .1 );
-right: 2.5em; /* 40 */
-}
-
-.audioplayer-novolume .audioplayer-time-duration {
-border-right: 0;
-right: 0;
-}
-
-
-/* progress bar of loaded/played */
-
-.audioplayer-bar {
-height: 0.875em; /* 14 */
-background-color: #222;
-cursor: pointer;
-z-index: 1;
-top: 50%;
-right: 6.875em; /* 110 */
-left: 6.875em; /* 110 */
-margin-top: -0.438em; /* 7 */
-}
-
-.audioplayer-novolume .audioplayer-bar {
-right: 4.375em; /* 70 */
-}
-
-.audioplayer-bar div {
-width: 0;
-height: 100%;
-position: absolute;
-left: 0;
-top: 0;
-}
-
-.audioplayer-bar-loaded {
-background-color: #333;
-z-index: 1;
-}
-
-.audioplayer-bar-played {
-background: #007fd1;
-z-index: 2;
-}
-
-
-/* volume button */
-
-.audioplayer-volume {
-width: 2.5em; /* 40 */
-height: 100%;
-border-left: 1px solid #111;
-border-left-color: rgba( 0, 0, 0, .25 );
-text-align: left;
-text-indent: -9999px;
-cursor: pointer;
-z-index: 2;
-top: 0;
-right: 0;
-}
-
-.audioplayer-volume:hover,
-.audioplayer-volume:focus {
-background-color: #222;
-}
-
-.audioplayer-volume-button {
-width: 100%;
-height: 100%;
-}
-
-.audioplayer-volume-button a {
-width: 0.313em; /* 5 */
-height: 0.375em; /* 6 */
-background-color: #fff;
-display: block;
-position: relative;
-z-index: 1;
-top: 40%;
-left: 35%;
-}
-
-.audioplayer-volume-button a:before,
-.audioplayer-volume-button a:after {
-content: '';
-position: absolute;
-}
-
-.audioplayer-volume-button a:before {
-width: 0;
-height: 0;
-border: 0.5em solid transparent; /* 8 */
-border-left: none;
-border-right-color: #fff;
-z-index: 2;
-top: 50%;
-right: -0.25em;
-margin-top: -0.5em; /* 8 */
-}
-
-.audioplayer:not(.audioplayer-muted) .audioplayer-volume-button a:after {
-width: 0.313em; /* 5 */
-height: 0.313em; /* 5 */
-border: 0.25em double #fff; /* 4 */
-border-width: 0.25em 0.25em 0 0; /* 4 */
-left: 0.563em; /* 9 */
-top: -0.063em; /* 1 */
--webkit-border-radius: 0 0.938em 0 0; /* 15 */
--moz-border-radius: 0 0.938em 0 0; /* 15 */
-border-radius: 0 0.938em 0 0; /* 15 */
--webkit-transform: rotate( 45deg );
--moz-transform: rotate( 45deg );
--ms-transform: rotate( 45deg );
--o-transform: rotate( 45deg );
-transform: rotate( 45deg );
-}
-
-
-/* volume dropdown */
-
-.audioplayer-volume-adjust {
-height: 6.25em; /* 100 */
-cursor: default;
-position: absolute;
-left: 0;
-right: -1px;
-top: -9999px;
-background: #333;
-}
-
-.audioplayer-volume:not(:hover) .audioplayer-volume-adjust {
-opacity: 0;
-}
-
-.audioplayer-volume:hover .audioplayer-volume-adjust {
-top: auto;
-bottom: 100%;
-}
-
-.audioplayer-volume-adjust > div {
-width: 40%;
-height: 80%;
-background-color: #222;
-cursor: pointer;
-position: relative;
-z-index: 1;
-margin: 30% auto 0;
-}
-
-.audioplayer-volume-adjust div div {
-width: 100%;
-height: 100%;
-position: absolute;
-bottom: 0;
-left: 0;
-background: #007fd1;
-}
-
-.audioplayer-novolume .audioplayer-volume {
-display: none;
-}
-
-
-/* CSS3 decorations */
-
-body {
--webkit-box-shadow: inset 0 0 18.75em rgba( 0, 0, 0, .5 ); /* 300 */
--moz-box-shadow: inset 0 0 18.75em rgba( 0, 0, 0, 5 ); /* 300 */
-box-shadow: inset 0 0 18.75em rgba( 0, 0, 0, .5 ); /* 300 */
-}
-
-.audioplayer {
--webkit-box-shadow: inset 0 1px 0 rgba( 255, 255, 255, .15 ), 0 0 1.25em rgba( 0, 0, 0, .5 ); /* 20 */
--moz-box-shadow: inset 0 1px 0 rgba( 255, 255, 255, .15 ), 0 0 1.25em rgba( 0, 0, 0, .5 ); /* 20 */
-box-shadow: inset 0 1px 0 rgba( 255, 255, 255, .15 ), 0 0 1.25em rgba( 0, 0, 0, .5 ); /* 20 */
-}
-
-.audioplayer-volume-adjust {
--webkit-box-shadow: -2px -2px 2px rgba( 0, 0, 0, .15 ), 2px -2px 2px rgba( 0, 0, 0, .15 );
--moz-box-shadow: -2px -2px 2px rgba( 0, 0, 0, .15 ), 2px -2px 2px rgba( 0, 0, 0, .15 );
-box-shadow: -2px -2px 2px rgba( 0, 0, 0, .15 ), 2px -2px 2px rgba( 0, 0, 0, .15 );
-}
-
-.audioplayer-bar,
-.audioplayer-volume-adjust > div {
--webkit-box-shadow: -1px -1px 0 rgba( 0, 0, 0, .5 ), 1px 1px 0 rgba( 255, 255, 255, .1 );
--moz-box-shadow: -1px -1px 0 rgba( 0, 0, 0, .5 ), 1px 1px 0 rgba( 255, 255, 255, .1 );
-box-shadow: -1px -1px 0 rgba( 0, 0, 0, .5 ), 1px 1px 0 rgba( 255, 255, 255, .1 );
-}
-
-.audioplayer-volume-adjust div div,
-.audioplayer-bar-played {
--webkit-box-shadow: inset 0 0 5px rgba( 255, 255, 255, .5 );
--moz-box-shadow: inset 0 0 5px rgba( 255, 255, 255, .5 );
-box-shadow: inset 0 0 5px rgba( 255, 255, 255, .5 );
-}
-
-.audioplayer-playpause,
-.audioplayer-volume a {
--webkit-filter: drop-shadow( 1px 1px 0 #000 );
--moz-filter: drop-shadow( 1px 1px 0 #000 );
--ms-filter: drop-shadow( 1px 1px 0 #000 );
--o-filter: drop-shadow( 1px 1px 0 #000 );
-filter: drop-shadow( 1px 1px 0 #000 );
-}
-
-.audioplayer,
-.audioplayer-volume-adjust {
-background: -webkit-gradient( linear, left top, left bottom, from( #444 ), to( #222 ) );
-background: -webkit-linear-gradient( top, #444, #222 );
-background: -moz-linear-gradient( top, #444, #222 );
-background: -ms-radial-gradient( top, #444, #222 );
-background: -o-linear-gradient( top, #444, #222 );
-background: linear-gradient( to bottom, #444, #222 );
-}
-
-.audioplayer-bar-played {
-background: -webkit-gradient( linear, left top, right top, from( #007fd1 ), to( #c600ff ) );
-background: -webkit-linear-gradient( left, #007fd1, #c600ff );
-background: -moz-linear-gradient( left, #007fd1, #c600ff );
-background: -ms-radial-gradient( left, #007fd1, #c600ff );
-background: -o-linear-gradient( left, #007fd1, #c600ff );
-background: linear-gradient( to right, #007fd1, #c600ff );
-}
-
-.audioplayer-volume-adjust div div {
-background: -webkit-gradient( linear, left bottom, left top, from( #007fd1 ), to( #c600ff ) );
-background: -webkit-linear-gradient( bottom, #007fd1, #c600ff );
-background: -moz-linear-gradient( bottom, #007fd1, #c600ff );
-background: -ms-radial-gradient( bottom, #007fd1, #c600ff );
-background: -o-linear-gradient( bottom, #007fd1, #c600ff );
-background: linear-gradient( to top, #007fd1, #c600ff );
-}
-
-.audioplayer-bar,
-.audioplayer-bar div,
-.audioplayer-volume-adjust div {
--webkit-border-radius: 4px;
--moz-border-radius: 4px;
-border-radius: 4px;
-}
-
-.audioplayer {
--webkit-border-radius: 2px;
--moz-border-radius: 2px;
-border-radius: 2px;
-}
-
-.audioplayer-volume-adjust {
--webkit-border-top-left-radius: 2px;
--webkit-border-top-right-radius: 2px;
--moz-border-radius-topleft: 2px;
--moz-border-radius-topright: 2px;
-border-top-left-radius: 2px;
-border-top-right-radius: 2px;
-}
-
-.audioplayer *,
-.audioplayer *:before,
-.audioplayer *:after {
--webkit-transition: color .25s ease, background-color .25s ease, opacity .5s ease;
--moz-transition: color .25s ease, background-color .25s ease, opacity .5s ease;
--ms-transition: color .25s ease, background-color .25s ease, opacity .5s ease;
--o-transition: color .25s ease, background-color .25s ease, opacity .5s ease;
-transition: color .25s ease, background-color .25s ease, opacity .5s ease;
-}
-
-
-/* responsiveness */
-
-@media only screen and ( max-width: 32.5em ) /* 520 */
-{
-body {
--webkit-box-shadow: inset 0 0 9.375em rgba( 0, 0, 0, .5 ); /* 150 */
--moz-box-shadow: inset 0 0 9.375em rgba( 0, 0, 0, 5 ); /* 150 */
-box-shadow: inset 0 0 9.375em rgba( 0, 0, 0, .5 ); /* 150 */
-}
-
-#wrapper {
-width: 90%;
-height: auto;
-position: static;
-padding: 1.25em; /* 20 */
-margin: 0;
-}
-}
-</style>
-
-<div id="wrapper">
-
-<audio preload="auto" controls>
-<source src="https://www.htmlbestcodes.com/files/track.mp3" />
-</audio>
-
-</div>
-<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
-<script src="https://www.htmlbestcodes.com/files/audioplayer.js"></script>
-
-
-<script>
-$(function () {
-$('audio').audioPlayer();
-});
-</script><a target='_blank' href='https://www.htmlbestcodes.com' style='font-size: 8pt; text-decoration: none'>Html Best Codes</a>
-`html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alexandre Lévesque's CV</title>
+    <title>Alexandre Levesque - Project Manager / Lighting Consultant</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
-            text-align: center;
-        }
-
-        .parallax {
-            background-image: url('img_parallax.jpg');
-            height: 500px;
-            background-attachment: fixed;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
+            background-color: #121212;
+            color: #fff;
         }
 
         header {
-            margin-top: 50px;
-            color: #333;
+            background: linear-gradient(to right, #141E30, #243B55);
+            padding: 20px;
+            text-align: center;
         }
 
         header h1 {
-            font-size: 3em;
-            margin-bottom: 10px;
+            margin: 0;
+            font-size: 2.5em;
         }
 
-        header p {
-            margin: 5px 0;
+        header h2 {
+            margin: 0;
+            font-size: 1.2em;
+            color: #ccc;
         }
 
-        header a {
-            color: #0077b5; /* LinkedIn Blue */
-            text-decoration: none;
-            margin: 0 10px;
-        }
-
-        .container {
-            width: 80%;
-            margin: 0 auto;
-            background-color: #fff;
+        .content {
+            max-width: 900px;
+            margin: 20px auto;
             padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            margin-top: 20px;
+            background-color: #1E1E1E;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
         }
 
-        section {
-            margin-bottom: 20px;
-            text-align: left;
+        .content p {
+            line-height: 1.6;
         }
 
-        section h2 {
-            border-bottom: 2px solid #0077b5; /* LinkedIn Blue */
-            padding-bottom: 5px;
-            margin-bottom: 10px;
+        .content a {
+            color: #1E90FF;
+            text-decoration: none;
+        }
+
+        .content a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #141E30;
+            color: #ccc;
+        }
+
+        .linkedin {
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .linkedin a {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #0077B5;
+            color: #fff;
+            border-radius: 5px;
+            font-size: 1.2em;
+            text-decoration: none;
+        }
+
+        .linkedin a:hover {
+            background-color: #005582;
+        }
+
+        .image-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .image-container img {
+            max-width: 100%;
+            border-radius: 10px;
+        }
+
+        .contact-form {
+            margin: 20px 0;
+            padding: 20px;
+            background-color: #2A2A2A;
+            border-radius: 10px;
+        }
+
+        .contact-form h3 {
+            margin-bottom: 15px;
             font-size: 1.5em;
+            color: #1E90FF;
         }
 
-        ul {
-            list-style-type: disc;
-            padding-left: 20px;
-        }
-
-        ul li {
+        .contact-form label {
+            display: block;
             margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: none;
+            border-radius: 5px;
+            background-color: #1E1E1E;
+            color: #fff;
+            font-size: 1em;
+        }
+
+        .contact-form button {
+            padding: 10px 20px;
+            background-color: #1E90FF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+        }
+
+        .contact-form button:hover {
+            background-color: #005582;
+        }
+
+        .email-contact {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 1.2em;
+        }
+
+        .email-contact a {
+            color: #1E90FF;
+            text-decoration: none;
+        }
+
+        .email-contact a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
-    <div class="parallax"></div>
+    <header>
+        <h1>Alexandre Levesque</h1>
+        <h2>Project Manager / Lighting Consultant</h2>
+    </header>
 
-    <div class="container">
-        <header>
-            <h1>Alexandre Lévesque</h1>
-            <p>Phone: (418) 933-1446 | Email: <a href="mailto:alexandrelevesque100@hotmail.com">alexandrelevesque100@hotmail.com</a></p>
-            <p>
-                <a href="https://www.linkedin.com/in/alexandre-levesque-05b12a19/" target="_blank">LinkedIn</a>
-            </p>
-        </header>
-        
-        <section id="summary">
-            <h2>Summary</h2>
-            <p>With over twenty years of experience in showbusiness, I have had the opportunity to manage numerous large-scale projects. 
-                My leadership skills allow me to effectively manage teams and ensure the smooth operation of various events. 
-                I aim to continue developing my expertise and expanding my knowledge in this field.</p>
-        </section>
-        
-        <section id="skills">
-            <h2>Key Skills</h2>
-            <ul>
-                <li>Management of multifunctional work teams</li>
-                <li>Excellent priority planning and organizational skills</li>
-                <li>Fluent communication in both English and French</li>
-                <li>Exceptional interpersonal and relational skills</li>
-                <li>Knowledge of communication protocols for lighting control</li>
-                <li>Inventory management, maintenance, and repair of equipment</li>
-                <li>Installation, configuration, and operation of lighting equipment</li>
-            </ul>
-        </section>
+    <div class="content">
+        <div class="image-container">
+            <img src="image.png" alt="Alexandre Levesque">
+        </div>
 
-        <section id="computer-skills">
-            <h2>Computer Skills</h2>
-            <ul>
-                <li>Excel</li>
-                <li>Microsoft Office Suite</li>
-                <li>Dynamic 365</li>
-                <li>Salesforce</li>
-                <li>CAD</li>
-            </ul>
-        </section>
+        <p>Hello, I'm Alexandre Levesque, a freelance Project Manager and Lighting Consultant. With over 15 years of experience as a Lightning Crew Chief, I have been a leader in the touring industry, contributing to some of the biggest productions.</p>
 
-        <section id="professional-experience">
-            <h2>Professional Experience</h2>
-            <div class="job">
-                <h3>Project Manager</h3>
-                <p>Solotech | 2006 - Present</p>
-                <ul>
-                    <li>Harry Styles Love on Tour Head LX 2021-2023</li>
-                    <li>The Glorious Sons Head LX 2020</li>
-                    <li>Mumford and Sons Delta Tour 2019</li>
-                    <li>Zedd Orbit Tour 2018</li>
-                    <li>Chance the Rapper Be Encouraged Tour 2017</li>
-                    <li>Michael Jackson Immortal Tour 2014</li>
-                    <li>And many more...</li>
-                </ul>
-            </div>
-            
-            <div class="job">
-                <h3>Chief Electrician/Lighting Designer</h3>
-                <p>Various Contracts | 2006 - 2009</p>
-                <ul>
-                    <li>Solotech</li>
-                    <li>IATSE Local 523</li>
-                    <li>Inter Scene</li>
-                </ul>
-            </div>
+        <p>I've had the privilege of working with renowned artists such as Coldplay, Harry Styles, Mumford and Sons, Zedd, and many more. My expertise lies in leading teams, managing projects, and delivering exceptional lighting solutions for live events.</p>
 
-            <!-- Other job experiences can be added similarly -->
-        </section>
+        <div class="linkedin">
+            <a href="https://www.linkedin.com/in/alexandre-levesque-05b12a19/" target="_blank">Connect with me on LinkedIn</a>
+        </div>
 
-        <section id="education">
-            <h2>Education</h2>
-            <ul>
-                <li>Project Management - Cégep Garneau, 2024</li>
-                <li>Fall Protection Certification - ACCiSST Group, 2020</li>
-                <li>College Studies Attestation (AEC) - École du Show-Business, 2001</li>
-                <li>High School Diploma - Polyvalente Arvida, 1998</li>
-            </ul>
-        </section>
+        <div class="contact-form">
+            <h3>Contact Me</h3>
+            <form action="#" method="post">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="message">Message</label>
+                <textarea id="message" name="message" rows="5" required></textarea>
+
+                <button type="submit">Send</button>
+            </form>
+        </div>
+
+        <div class="email-contact">
+            <p>Or reach me directly at: <a href="mailto:alexandrelevesque100@hotmail.com">alexandrelevesque100@hotmail.com</a></p>
+        </div>
     </div>
+
+    <footer>
+        <p>&copy; 2024 Alexandre Levesque. All rights reserved.</p>
+    </footer>
 </body>
-</html>
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  </head>
-  <style>
-    main {
-      padding: 20px;
-      display: block;
-      min-height: 100vh;
-      min-width: 100vh;
-    }
-    h2 {
-      text-align: center;
-      color: #004aad;
-    }
-    .comment-section {
-      max-height: 50vh;
-      max-width: 100%;
-      background-color: #004aad;
-      overflow-y: scroll;
-    }
-    .comment {
-     height: 10%;
-      padding: 2%;
-      margin: 2%;
-      background-color: #ffff;
-      color: black;
-    }
-  </style>
-  <body>
-    <h2>Scrollable HTML Comment Box Code</h2>
-    <main>
-      <div class="comment-section">
-        <div class="comment">This is first comment.</div>
-        <div class="comment">This is second comment.</div>
-        <div class="comment">This is third comment.</div>
-        <div class="comment">This is fourth comment.</div>
-        <div class="comment">This is fifth comment.</div>
-        <div class="comment">This is sixth comment.</div>
-    </div>
-    </main>
-  </body>
 </html>
