@@ -57,10 +57,6 @@
                 document.body.style.backgroundPosition = `${50 + x * 10}% ${50 + y * 10}%`;
             });
         }
-
-        document.querySelector('.cta').addEventListener('click', () => {
-            window.location.href = 'index.html';
-        });
     </script>
 </head>
 <body>
@@ -68,5 +64,11 @@
         <div class="quote">"Come forth into the light of things, let nature be your teacher."</div>
     </div>
     <a href="index.html" class="cta">Click to enter the light</a>
+    <script>
+        document.querySelector('.cta').addEventListener('click', (event) => {
+            event.preventDefault();
+            window.location.href = 'index.html';
+        });
+    </script>
 </body>
 </html>
