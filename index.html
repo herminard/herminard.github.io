@@ -19,6 +19,8 @@
             height: 100vh;
             display: flex;
             flex-direction: column;
+            margin: 0;
+            padding: 0;
         }
 
         .hero {
@@ -139,6 +141,40 @@
         footer p {
             font-size: 1.2rem;
         }
+
+        /* Media Queries for responsiveness */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .hero h2 {
+                font-size: 1.5rem;
+            }
+
+            .section h3 {
+                font-size: 2.5rem;
+            }
+
+            .section p {
+                font-size: 1.2rem;
+            }
+
+            .link-button {
+                font-size: 1rem;
+                padding: 10px 20px;
+            }
+
+            .contact-form input, .contact-form textarea {
+                font-size: 1rem;
+                padding: 10px;
+            }
+
+            .contact-form button {
+                font-size: 1rem;
+                padding: 12px 25px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -151,7 +187,7 @@
 
     <div id="about" class="section">
         <h3>About Me</h3>
-        <p>With over 15 years of experience in the lighting industry, I have collaborated with world-class artists such as Coldplay, Harry Styles, and Zedd. I specialize in managing complex projects and creating innovative lighting solutions.</p>
+        <p>With over 20 years of experience in the lighting industry and systems integration for audio-visual, I have collaborated with world-class artists such as Coldplay, Harry Styles, and Zedd. I specialize in managing complex projects and creating innovative lighting solutions.</p>
         <a href="https://www.linkedin.com/in/alexandre-levesque-05b12a19/" class="link-button" target="_blank">Connect with me on LinkedIn</a>
     </div>
 
@@ -178,3 +214,4 @@
 
 </body>
 </html>
+
