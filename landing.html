@@ -13,7 +13,7 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://source.unsplash.com/1600x900/?nature') no-repeat center center/cover;
+            background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)), url('https://source.unsplash.com/1600x900/?nature') no-repeat center center/cover;
             color: #fff;
             font-family: 'Roboto', sans-serif;
             text-align: center;
@@ -31,11 +31,6 @@
             margin-bottom: 20px;
             font-family: 'Dancing Script', cursive;
         }
-        .author {
-            font-size: 1.5rem;
-            margin-bottom: 30px;
-            font-weight: bold;
-        }
         .cta {
             font-size: 1.5rem;
             text-decoration: none;
@@ -52,17 +47,18 @@
         }
     </style>
     <script>
-        document.addEventListener('mousemove', (e) => {
-            const x = e.clientX / window.innerWidth - 0.5;
-            const y = e.clientY / window.innerHeight - 0.5;
-            document.body.style.backgroundPosition = `${50 + x * 10}% ${50 + y * 10}%`;
-        });
+        if (window.DeviceMotionEvent) {
+            window.addEventListener('devicemotion', (event) => {
+                const x = event.accelerationIncludingGravity.x / 10;
+                const y = event.accelerationIncludingGravity.y / 10;
+                document.body.style.backgroundPosition = `${50 + x * 10}% ${50 + y * 10}%`;
+            });
+        }
     </script>
 </head>
 <body>
     <div class="container">
         <div class="quote">"Come forth into the light of things, let nature be your teacher."</div>
-        <div class="author">- William Wordsworth</div>
         <a href="index.html" class="cta">Alexandre Levesque</a>
     </div>
 </body>
