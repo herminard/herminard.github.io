@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Roboto:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Roboto:wght@400;700&display=swap');
         
         body {
             display: flex;
@@ -13,23 +13,24 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)), url('https://source.unsplash.com/1600x900/?nature') no-repeat center center/cover;
+            background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)), url('https://source.unsplash.com/1600x900/?space') no-repeat center center/cover;
             color: #fff;
             font-family: 'Roboto', sans-serif;
             text-align: center;
             overflow: hidden;
+            cursor: pointer;
         }
         .container {
             max-width: 800px;
             padding: 40px;
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(0, 0, 0, 0.5);
             border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
         }
         .quote {
-            font-size: 3rem;
+            font-size: 3.5rem;
             margin-bottom: 20px;
-            font-family: 'Dancing Script', cursive;
+            font-family: 'Orbitron', sans-serif;
         }
         .cta {
             font-size: 1.5rem;
@@ -39,7 +40,7 @@
             color: white;
             border-radius: 30px;
             transition: background-color 0.3s ease, transform 0.3s ease;
-            font-family: 'Dancing Script', cursive;
+            font-family: 'Orbitron', sans-serif;
         }
         .cta:hover {
             background-color: #FFA000;
@@ -54,6 +55,10 @@
                 document.body.style.backgroundPosition = `${50 + x * 10}% ${50 + y * 10}%`;
             });
         }
+
+        document.body.addEventListener('click', () => {
+            window.location.href = 'index.html';
+        });
     </script>
 </head>
 <body>
@@ -61,5 +66,6 @@
         <div class="quote">"Come forth into the light of things, let nature be your teacher."</div>
         <a href="index.html" class="cta">Alexandre Levesque</a>
     </div>
+    <div class="cta">Click anywhere to enter the light</div>
 </body>
 </html>
