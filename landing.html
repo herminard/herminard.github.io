@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Roboto:wght@400;700&display=swap');
+        
         body {
             display: flex;
             justify-content: center;
@@ -13,23 +15,24 @@
             margin: 0;
             background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://source.unsplash.com/1600x900/?nature') no-repeat center center/cover;
             color: #fff;
-            font-family: 'Helvetica Neue', Arial, sans-serif;
+            font-family: 'Roboto', sans-serif;
             text-align: center;
+            overflow: hidden;
         }
         .container {
-            max-width: 600px;
+            max-width: 800px;
             padding: 40px;
             background: rgba(255, 255, 255, 0.2);
             border-radius: 10px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
         .quote {
-            font-size: 2rem;
+            font-size: 3rem;
             margin-bottom: 20px;
-            font-style: italic;
+            font-family: 'Dancing Script', cursive;
         }
         .author {
-            font-size: 1.2rem;
+            font-size: 1.5rem;
             margin-bottom: 30px;
             font-weight: bold;
         }
@@ -41,18 +44,26 @@
             color: white;
             border-radius: 30px;
             transition: background-color 0.3s ease, transform 0.3s ease;
+            font-family: 'Dancing Script', cursive;
         }
         .cta:hover {
             background-color: #FFA000;
             transform: scale(1.05);
         }
     </style>
+    <script>
+        document.addEventListener('mousemove', (e) => {
+            const x = e.clientX / window.innerWidth - 0.5;
+            const y = e.clientY / window.innerHeight - 0.5;
+            document.body.style.backgroundPosition = `${50 + x * 10}% ${50 + y * 10}%`;
+        });
+    </script>
 </head>
 <body>
     <div class="container">
         <div class="quote">"Come forth into the light of things, let nature be your teacher."</div>
         <div class="author">- William Wordsworth</div>
-        <a href="index.html" class="cta">Enter</a>
+        <a href="index.html" class="cta">Alexandre Levesque</a>
     </div>
 </body>
 </html>
