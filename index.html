@@ -5,203 +5,176 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alexandre Levesque - Project Manager / Lighting Consultant</title>
     <style>
-        body {
-            font-family: 'Helvetica Neue', Arial, sans-serif;
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
             background-color: #101820;
             color: #F2F2F2;
-            line-height: 1.6;
+            overflow-x: hidden;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
-        header {
-            background: linear-gradient(to right, #0F2027, #203A43, #2C5364);
-            padding: 30px;
+        .hero {
+            position: relative;
+            height: 100vh;
+            background: url('https://source.unsplash.com/1600x900/?lighting,concert') no-repeat center center/cover;
+            color: #fff;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 1s ease;
+        }
+
+        .hero h1 {
+            font-size: 5rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .hero h2 {
+            font-size: 2rem;
+            font-weight: lighter;
+            margin-top: 10px;
+        }
+
+        .hero .cta {
+            margin-top: 30px;
+            font-size: 1.2rem;
+            text-decoration: none;
+            background-color: #1DB954;
+            padding: 12px 30px;
+            color: white;
+            border-radius: 30px;
+            transition: background-color 0.3s ease;
+        }
+
+        .hero .cta:hover {
+            background-color: #159C44;
+        }
+
+        .section {
+            padding: 80px 20px;
             text-align: center;
         }
 
-        header h1 {
-            margin: 0;
-            font-size: 3em;
-            color: #F2F2F2;
-        }
-
-        header h2 {
-            margin: 10px 0 0;
-            font-size: 1.5em;
-            color: #A0A0A0;
-            font-weight: 300;
-        }
-
-        .content {
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 20px;
-            background-color: #1C1C1C;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-        }
-
-        .content p {
+        .section h3 {
+            font-size: 3rem;
             margin-bottom: 20px;
+            color: #1DB954;
         }
 
-        .content a {
+        .section p {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+        }
+
+        .link-button {
+            font-size: 1.1rem;
             color: #1DB954;
             text-decoration: none;
-            font-weight: 500;
-        }
-
-        .content a:hover {
-            text-decoration: underline;
-        }
-
-        footer {
-            text-align: center;
-            padding: 15px;
-            background-color: #0F2027;
-            color: #A0A0A0;
-            font-size: 0.9em;
-        }
-
-        .linkedin {
-            margin: 30px 0;
-            text-align: center;
-        }
-
-        .linkedin a {
-            display: inline-block;
+            border: 2px solid #1DB954;
             padding: 12px 25px;
-            background-color: #0077B5;
-            color: #F2F2F2;
-            border-radius: 5px;
-            font-size: 1.1em;
-            text-decoration: none;
-            font-weight: bold;
+            border-radius: 30px;
+            transition: background-color 0.3s ease;
         }
 
-        .linkedin a:hover {
-            background-color: #005582;
-        }
-
-        .image-container {
-            text-align: center;
-            margin: 20px 0;
-        }
-
-        .image-container img {
-            max-width: 100%;
-            border-radius: 10px;
+        .link-button:hover {
+            background-color: #1DB954;
+            color: white;
         }
 
         .contact-form {
-            margin: 30px 0;
-            padding: 20px;
             background-color: #2A2A2A;
+            padding: 40px;
             border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-        }
-
-        .contact-form h3 {
-            margin-bottom: 15px;
-            font-size: 1.8em;
-            color: #1DB954;
-        }
-
-        .contact-form label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            margin-top: 50px;
+            max-width: 700px;
+            margin: 30px auto;
         }
 
         .contact-form input, .contact-form textarea {
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             margin-bottom: 20px;
             border: 1px solid #333;
-            border-radius: 5px;
+            border-radius: 8px;
             background-color: #101820;
-            color: #F2F2F2;
-            font-size: 1em;
+            color: #fff;
+            font-size: 1.1rem;
         }
 
         .contact-form button {
-            padding: 12px 25px;
             background-color: #1DB954;
-            color: #F2F2F2;
+            color: white;
+            padding: 15px 30px;
+            font-size: 1.2rem;
             border: none;
-            border-radius: 5px;
-            font-size: 1em;
+            border-radius: 30px;
             cursor: pointer;
+            transition: background-color 0.3s ease;
         }
 
         .contact-form button:hover {
             background-color: #159C44;
         }
 
-        .email-contact {
+        footer {
+            background-color: #101820;
             text-align: center;
-            margin-top: 20px;
-            font-size: 1.2em;
+            color: #A0A0A0;
+            padding: 20px 0;
         }
 
-        .email-contact a {
-            color: #1DB954;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        .email-contact a:hover {
-            text-decoration: underline;
+        footer p {
+            font-size: 1.2rem;
         }
     </style>
 </head>
 <body>
-    <header>
+
+    <div class="hero">
         <h1>Alexandre Levesque</h1>
         <h2>Project Manager / Lighting Consultant</h2>
-    </header>
+        <a href="#about" class="cta">Explore My Work</a>
+    </div>
 
-    <div class="content">
-        <div class="image-container">
-            <img src="image.png" alt="Alexandre Levesque">
-        </div>
+    <div id="about" class="section">
+        <h3>About Me</h3>
+        <p>With over 15 years of experience in the lighting industry, I have collaborated with world-class artists such as Coldplay, Harry Styles, and Zedd. I specialize in managing complex projects and creating innovative lighting solutions.</p>
+        <a href="https://www.linkedin.com/in/alexandre-levesque-05b12a19/" class="link-button" target="_blank">Connect with me on LinkedIn</a>
+    </div>
 
-        <p>Welcome! I am Alexandre Levesque, a dedicated freelance Project Manager and Lighting Consultant. With over 15 years of expertise as a Lightning Crew Chief, I bring leadership and creativity to the live event industry.</p>
-
-        <p>My career includes collaborations with world-class artists such as Coldplay, Harry Styles, Mumford and Sons, Zedd, and more. My focus is on leading teams, executing complex projects, and delivering innovative lighting solutions.</p>
-
-        <div class="linkedin">
-            <a href="https://www.linkedin.com/in/alexandre-levesque-05b12a19/" target="_blank">Connect with me on LinkedIn</a>
-        </div>
+    <div class="section">
+        <h3>Contact Me</h3>
+        <p>Let’s create something unforgettable together. Fill out the form below or send me a message directly via email.</p>
 
         <div class="contact-form">
-            <h3>Contact Me</h3>
-            <form action="#" method="post">
-                <label for="name">Name</label>
-                <input type="text" id="name" name="name" required>
-
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" required>
-
-                <label for="message">Message</label>
-                <textarea id="message" name="message" rows="5" required></textarea>
-
-                <button type="submit">Send</button>
+            <h3>Get in Touch</h3>
+            <form action="#" method="POST">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <textarea name="message" rows="6" placeholder="Your Message" required></textarea>
+                <button type="submit">Send Message</button>
             </form>
         </div>
 
-        <div class="email-contact">
-            <p>Or reach me directly at: <a href="mailto:alexandrelevesque100@hotmail.com">alexandrelevesque100@hotmail.com</a></p>
-        </div>
+        <p>Or reach me at: <a href="mailto:alexandrelevesque100@hotmail.com" class="link-button">alexandrelevesque100@hotmail.com</a></p>
     </div>
 
     <footer>
         <p>&copy; 2024 Alexandre Levesque. All rights reserved.</p>
     </footer>
+
 </body>
 </html>
-
-   
- 
-    
