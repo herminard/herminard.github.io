@@ -1,6 +1,8 @@
-
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
+
+const truckImage = new Image();
+truckImage.src = 'truck.png';
 
 const truck = { x: canvas.width - 210, y: canvas.height - 110, width: 200, height: 100 };
 
@@ -25,8 +27,7 @@ function drawObstacles() {
 }
 
 function drawTruck() {
-    ctx.fillStyle = 'black';
-    ctx.fillRect(truck.x, truck.y, truck.width, truck.height);
+    ctx.drawImage(truckImage, truck.x, truck.y, truck.width, truck.height);
 }
 
 function update() {
