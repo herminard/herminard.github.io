@@ -1,1 +1,57 @@
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background-color: #101820;
+    color: #F2F2F2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+}
 
+h1 {
+    font-size: 3rem;
+    color: #FFC107;
+    text-transform: uppercase;
+    margin: 20px 0;
+    font-family: 'Rock Salt', cursive;
+}
+
+canvas {
+    border: 1px solid #F2F2F2;
+}
+
+.controls {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px;
+    position: absolute;
+    bottom: 0;
+}
+
+.controls button {
+    background-color: #FFC107;
+    color: white;
+    border: none;
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.controls button:hover {
+    background-color: #FFA000;
+}
+
+.controls .speed-controls {
+    display: flex;
+    gap: 10px;
+}
+
+.controls .direction-controls {
+    display: flex;
+    gap: 10px;
+}
