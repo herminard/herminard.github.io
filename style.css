@@ -38,24 +38,24 @@ canvas {
     background-color: #FFC107;
     color: white;
     border: none;
-    padding: 10px;
-    font-size: 1rem;
+    padding: 5px; /* Reduced size */
+    font-size: 0.8rem; /* Reduced size */
     border-radius: 5px;
     cursor: pointer;
-    touch-action: manipulation; /* Empêche le zoom sur les boutons */
+    touch-action: manipulation; /* Prevent zoom on buttons */
 }
 
 .controls button:hover {
     background-color: #FFA000;
 }
 
-.controls .speed-controls {
+.controls .speed-controls,
+.controls .direction-controls {
     display: flex;
     gap: 10px;
 }
 
 .controls .direction-controls {
-    display: flex;
     flex-direction: column;
     align-items: center;
     gap: 5px;
@@ -65,6 +65,7 @@ canvas {
     display: flex;
     gap: 5px;
 }
+
 #truck {
     width: 200px;
     height: 200px;
