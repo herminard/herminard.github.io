@@ -1,7 +1,8 @@
+
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 
-const truck = { x: canvas.width - 210, y: canvas.height - 210, width: 200, height: 200 };
+const truck = { x: canvas.width - 210, y: canvas.height - 110, width: 200, height: 100 };
 
 let player = { x: 50, y: 50, width: 30, height: 30, dx: 0, dy: 0, speed: 2 };
 let obstacles = [];
@@ -37,6 +38,11 @@ function update() {
         player.y + player.height > truck.y && player.y < truck.y + truck.height) {
         player.x = 50;
         player.y = 50;
+        score += 100;
+        document.getElementById('score').textContent = "Score: " + score;
+        if (score >= 1000) {
+            displayFireworks();
+        }
     }
 
     obstacles.forEach(obstacle => {
@@ -44,7 +50,8 @@ function update() {
             player.x + player.width > obstacle.x &&
             player.y < obstacle.y + obstacle.height &&
             player.y + player.height > obstacle.y) {
-            score += 1;
+            player.x = 50;
+            player.y = 50;
             obstacle.x = Math.random() * canvas.width;
             obstacle.y = Math.random() * canvas.height;
         }
@@ -143,5 +150,28 @@ document.getElementById('moveDown').addEventListener('mouseup', (e) => {
 
 document.addEventListener('keydown', movePlayer);
 document.addEventListener('keyup', stopPlayer);
+
+function displayFireworks() {
+    const fireworks = document.createElement('div');
+    fireworks.classList.add('fireworks');
+    fireworks.innerHTML = '<img src="fireworks.gif" alt="Fireworks">';
+    document.body.appendChild(fireworks);
+    fireworks.style.display = 'block';
+
+    setTimeout(() => {
+        fireworks.style.display = 'none';
+        document.body.removeChild(fireworks);
+        if (confirm('You won! Play again?')) {
+            score = 0;
+            document.getElementById('score').textContent = "Score: " + score;
+            player.x = 50;
+            player.y = 50;
+            obstacles.forEach(obstacle => {
+                obstacle.x = Math.random() * canvas.width;
+                obstacle.y = Math.random() * canvas.height;
+            });
+        }
+    }, 5000);
+}
 
 update();
