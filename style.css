@@ -65,3 +65,11 @@ canvas {
     display: flex;
     gap: 5px;
 }
+#truck {
+    width: 200px;
+    height: 200px;
+    background-color: black;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
