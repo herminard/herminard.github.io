@@ -21,6 +21,8 @@ h1 {
 
 canvas {
     border: 1px solid #F2F2F2;
+    width: 90%;  /* Ajuste la largeur du canvas */
+    max-width: 600px;  /* Limite la largeur maximale du canvas */
 }
 
 .controls {
@@ -40,6 +42,7 @@ canvas {
     font-size: 1rem;
     border-radius: 5px;
     cursor: pointer;
+    touch-action: manipulation;  /* Empêche le zoom sur les boutons */
 }
 
 .controls button:hover {
