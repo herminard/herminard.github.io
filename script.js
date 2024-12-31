@@ -80,45 +80,55 @@ function stopPlayer(e) {
     }
 }
 
-document.getElementById('speedUp').addEventListener('click', () => {
+document.getElementById('speedUp').addEventListener('click', (e) => {
+    e.preventDefault();
     player.speed += 1;
 });
 
-document.getElementById('speedDown').addEventListener('click', () => {
+document.getElementById('speedDown').addEventListener('click', (e) => {
+    e.preventDefault();
     if (player.speed > 1) {
         player.speed -= 1;
     }
 });
 
-document.getElementById('moveLeft').addEventListener('mousedown', () => {
+document.getElementById('moveLeft').addEventListener('mousedown', (e) => {
+    e.preventDefault();
     player.dx = -player.speed;
 });
 
-document.getElementById('moveRight').addEventListener('mousedown', () => {
+document.getElementById('moveRight').addEventListener('mousedown', (e) => {
+    e.preventDefault();
     player.dx = player.speed;
 });
 
-document.getElementById('moveUp').addEventListener('mousedown', () => {
+document.getElementById('moveUp').addEventListener('mousedown', (e) => {
+    e.preventDefault();
     player.dy = -player.speed;
 });
 
-document.getElementById('moveDown').addEventListener('mousedown', () => {
+document.getElementById('moveDown').addEventListener('mousedown', (e) => {
+    e.preventDefault();
     player.dy = player.speed;
 });
 
-document.getElementById('moveLeft').addEventListener('mouseup', () => {
+document.getElementById('moveLeft').addEventListener('mouseup', (e) => {
+    e.preventDefault();
     player.dx = 0;
 });
 
-document.getElementById('moveRight').addEventListener('mouseup', () => {
+document.getElementById('moveRight').addEventListener('mouseup', (e) => {
+    e.preventDefault();
     player.dx = 0;
 });
 
-document.getElementById('moveUp').addEventListener('mouseup', () => {
+document.getElementById('moveUp').addEventListener('mouseup', (e) => {
+    e.preventDefault();
     player.dy = 0;
 });
 
-document.getElementById('moveDown').addEventListener('mouseup', () => {
+document.getElementById('moveDown').addEventListener('mouseup', (e) => {
+    e.preventDefault();
     player.dy = 0;
 });
 
