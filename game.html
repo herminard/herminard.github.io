@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test Your Skill</title>
+    <title>Load That Truck</title>
     <style>
         body {
             font-family: 'Helvetica Neue', Arial, sans-serif;
             background-color: #101820;
             color: #F2F2F2;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
@@ -17,19 +18,71 @@
             overflow: hidden;
         }
 
+        h1 {
+            font-size: 3rem;
+            color: #FFC107;
+            text-transform: uppercase;
+            margin: 20px 0;
+            font-family: 'Rock Salt', cursive;
+        }
+
         canvas {
             border: 1px solid #F2F2F2;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            padding: 10px;
+            position: absolute;
+            bottom: 0;
+        }
+
+        .controls button {
+            background-color: #FFC107;
+            color: white;
+            border: none;
+            padding: 10px;
+            font-size: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .controls button:hover {
+            background-color: #FFA000;
+        }
+
+        .controls .speed-controls {
+            display: flex;
+            gap: 10px;
+        }
+
+        .controls .direction-controls {
+            display: flex;
+            gap: 10px;
         }
     </style>
 </head>
 <body>
+    <h1>Load That Truck</h1>
     <canvas id="gameCanvas" width="800" height="600"></canvas>
+    <div class="controls">
+        <div class="speed-controls">
+            <button id="speedDown">- Speed</button>
+            <button id="speedUp">+ Speed</button>
+        </div>
+        <div class="direction-controls">
+            <button id="moveLeft">Left</button>
+            <button id="moveRight">Right</button>
+        </div>
+    </div>
     <script>
         const canvas = document.getElementById('gameCanvas');
         const ctx = canvas.getContext('2d');
 
         // Game variables
-        let player = { x: 50, y: 50, width: 30, height: 30, dx: 0, dy: 0 };
+        let player = { x: 50, y: 50, width: 30, height: 30, dx: 0, dy: 0, speed: 2 };
         let obstacles = [];
         let score = 0;
 
@@ -80,16 +133,16 @@
         function movePlayer(e) {
             switch (e.key) {
                 case 'ArrowUp':
-                    player.dy = -2;
+                    player.dy = -player.speed;
                     break;
                 case 'ArrowDown':
-                    player.dy = 2;
+                    player.dy = player.speed;
                     break;
                 case 'ArrowLeft':
-                    player.dx = -2;
+                    player.dx = -player.speed;
                     break;
                 case 'ArrowRight':
-                    player.dx = 2;
+                    player.dx = player.speed;
                     break;
             }
         }
@@ -106,6 +159,32 @@
                     break;
             }
         }
+
+        document.getElementById('speedUp').addEventListener('click', () => {
+            player.speed += 1;
+        });
+
+        document.getElementById('speedDown').addEventListener('click', () => {
+            if (player.speed > 1) {
+                player.speed -= 1;
+            }
+        });
+
+        document.getElementById('moveLeft').addEventListener('mousedown', () => {
+            player.dx = -player.speed;
+        });
+
+        document.getElementById('moveRight').addEventListener('mousedown', () => {
+            player.dx = player.speed;
+        });
+
+        document.getElementById('moveLeft').addEventListener('mouseup', () => {
+            player.dx = 0;
+        });
+
+        document.getElementById('moveRight').addEventListener('mouseup', () => {
+            player.dx = 0;
+        });
 
         document.addEventListener('keydown', movePlayer);
         document.addEventListener('keyup', stopPlayer);
