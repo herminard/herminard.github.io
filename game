@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Your Skill</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: #101820;
+            color: #F2F2F2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        canvas {
+            border: 1px solid #F2F2F2;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="gameCanvas" width="800" height="600"></canvas>
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // Game variables
+        let player = { x: 50, y: 50, width: 30, height: 30, dx: 0, dy: 0 };
+        let obstacles = [];
+        let score = 0;
+
+        // Create obstacles
+        for (let i = 0; i < 5; i++) {
+            obstacles.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, width: 30, height: 30 });
+        }
+
+        function drawPlayer() {
+            ctx.fillStyle = 'blue';
+            ctx.fillRect(player.x, player.y, player.width, player.height);
+        }
+
+        function drawObstacles() {
+            ctx.fillStyle = 'red';
+            obstacles.forEach(obstacle => {
+                ctx.fillRect(obstacle.x, obstacle.y, obstacle.width, obstacle.height);
+            });
+        }
+
+        function update() {
+            player.x += player.dx;
+            player.y += player.dy;
+
+            // Check for collisions
+            obstacles.forEach(obstacle => {
+                if (player.x < obstacle.x + obstacle.width &&
+                    player.x + player.width > obstacle.x &&
+                    player.y < obstacle.y + obstacle.height &&
+                    player.y + player.height > obstacle.y) {
+                    score += 1;
+                    obstacle.x = Math.random() * canvas.width;
+                    obstacle.y = Math.random() * canvas.height;
+                }
+            });
+
+            // Clear canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Draw everything
+            drawPlayer();
+            drawObstacles();
+
+            // Animation loop
+            requestAnimationFrame(update);
+        }
+
+        function movePlayer(e) {
+            switch (e.key) {
+                case 'ArrowUp':
+                    player.dy = -2;
+                    break;
+                case 'ArrowDown':
+                    player.dy = 2;
+                    break;
+                case 'ArrowLeft':
+                    player.dx = -2;
+                    break;
+                case 'ArrowRight':
+                    player.dx = 2;
+                    break;
+            }
+        }
+
+        function stopPlayer(e) {
+            switch (e.key) {
+                case 'ArrowUp':
+                case 'ArrowDown':
+                    player.dy = 0;
+                    break;
+                case 'ArrowLeft':
+                case 'ArrowRight':
+                    player.dx = 0;
+                    break;
+            }
+        }
+
+        document.addEventListener('keydown', movePlayer);
+        document.addEventListener('keyup', stopPlayer);
+
+        update();
+    </script>
+</body>
+</html>
