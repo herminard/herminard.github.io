@@ -1,12 +1,12 @@
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 
-// Game variables
+const truck = { x: canvas.width - 210, y: canvas.height - 210, width: 200, height: 200 };
+
 let player = { x: 50, y: 50, width: 30, height: 30, dx: 0, dy: 0, speed: 2 };
 let obstacles = [];
 let score = 0;
 
-// Create obstacles
 for (let i = 0; i < 5; i++) {
     obstacles.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, width: 30, height: 30 });
 }
@@ -23,11 +23,22 @@ function drawObstacles() {
     });
 }
 
+function drawTruck() {
+    ctx.fillStyle = 'black';
+    ctx.fillRect(truck.x, truck.y, truck.width, truck.height);
+}
+
 function update() {
     player.x += player.dx;
     player.y += player.dy;
 
-    // Check for collisions
+    // Check if player is in the truck
+    if (player.x + player.width > truck.x && player.x < truck.x + truck.width &&
+        player.y + player.height > truck.y && player.y < truck.y + truck.height) {
+        player.x = 50;
+        player.y = 50;
+    }
+
     obstacles.forEach(obstacle => {
         if (player.x < obstacle.x + obstacle.width &&
             player.x + player.width > obstacle.x &&
@@ -39,14 +50,12 @@ function update() {
         }
     });
 
-    // Clear canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Draw everything
+    drawTruck();
     drawPlayer();
     drawObstacles();
 
-    // Animation loop
     requestAnimationFrame(update);
 }
 
