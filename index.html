@@ -23,13 +23,23 @@
             padding: 0;
         }
 
+        .video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
         .background-shapes {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1;
+            z-index: -2;
             overflow: hidden;
         }
 
@@ -46,13 +56,12 @@
             background-color: white;
             opacity: 0.2;
             border-radius: 50%;
-            z-index: -1;
+            z-index: -2;
         }
 
         .hero {
             position: relative;
             height: 100vh;
-            background: url('https://source.unsplash.com/1600x900/?lighting,concert') no-repeat center center/cover;
             color: #fff;
             text-align: center;
             display: flex;
@@ -212,6 +221,10 @@
     </style>
 </head>
 <body>
+    <video autoplay muted loop class="video-background">
+        <source src="path_to_your_video.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
     <div class="background-shapes">
         <div class="line" style="top: 10%; left: 5%; height: 80%; transform: rotate(10deg);"></div>
         <div class="line" style="top: 20%; left: 10%; height: 60%; transform: rotate(-20deg);"></div>
@@ -229,8 +242,8 @@
 
     <div id="about" class="section">
         <h3>About Me</h3>
-        <p>With over 20 years of experience in the lighting industry and audiovisual systems integration, I have had the privilege of collaborating with world-renowned artists such as Coldplay, Harry Styles, and Mumford & Sons on large-scale tours and live events. My work in live production focuses on delivering innovative lighting solutions and seamless audiovisual integration to create unforgettable audience experiences.</p>
-        <p>I also specialize in lighting consulting for new multidisciplinary spaces, working closely with architects, engineers, and project managers to design cutting-edge lighting and audiovisual systems. From newly constructed venues to renovated spaces, I ensure the seamless integration of systems that meet both aesthetic and functional needs, delivering exceptional results in every project.</p>
+        <p>With over 20 years of experience in the lighting industry and audiovisual systems integration, I have had the privilege of collaborating with world-renowned artists such as Coldplay, H[...]
+        <p>I also specialize in lighting consulting for new multidisciplinary spaces, working closely with architects, engineers, and project managers to design cutting-edge lighting and audiovis[...]
         <a href="https://www.linkedin.com/in/alexandre-levesque-05b12a19/" class="link-button" target="_blank">Connect with me on LinkedIn</a>
     </div>
 
@@ -257,6 +270,5 @@
             <img src="https://i.imgur.com/rjl4Oe9.jpg" alt="Jaguar Crew" width="50" height="50">
         </a>
     </footer>
-
 </body>
 </html>
