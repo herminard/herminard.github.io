@@ -98,12 +98,28 @@ document.getElementById('moveRight').addEventListener('mousedown', () => {
     player.dx = player.speed;
 });
 
+document.getElementById('moveUp').addEventListener('mousedown', () => {
+    player.dy = -player.speed;
+});
+
+document.getElementById('moveDown').addEventListener('mousedown', () => {
+    player.dy = player.speed;
+});
+
 document.getElementById('moveLeft').addEventListener('mouseup', () => {
     player.dx = 0;
 });
 
 document.getElementById('moveRight').addEventListener('mouseup', () => {
     player.dx = 0;
+});
+
+document.getElementById('moveUp').addEventListener('mouseup', () => {
+    player.dy = 0;
+});
+
+document.getElementById('moveDown').addEventListener('mouseup', () => {
+    player.dy = 0;
 });
 
 document.addEventListener('keydown', movePlayer);
