@@ -12,77 +12,19 @@ body {
 }
 
 h1 {
-    font-size: 3rem;
+    font-size: 2rem;
     color: #FFC107;
     text-transform: uppercase;
     margin: 20px 0;
-    font-family: 'Press Start 2P', cursive;
 }
 
 canvas {
-    border: 1px solid #F2F2F2;
-    width: 90%;
-    max-width: 600px;
-}
-
-.controls {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    padding: 10px;
-    position: absolute;
-    bottom: 0;
-}
-
-.controls button {
-    background-color: #FFC107;
-    color: white;
-    border: none;
-    padding: 5px;
-    font-size: 0.8rem;
-    border-radius: 5px;
-    cursor: pointer;
-    touch-action: manipulation;
-}
-
-.controls button:hover {
-    background-color: #FFA000;
-}
-
-.controls .speed-controls,
-.controls .direction-controls {
-    display: flex;
-    gap: 10px;
-}
-
-.controls .direction-controls {
-    flex-direction: column;
-    align-items: center;
-    gap: 5px;
-}
-
-.dpad-middle {
-    display: flex;
-    gap: 5px;
-}
-
-#truck {
-    width: 200px;
-    height: 100px;
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
+    border: 2px solid #F2F2F2;
+    background-color: #222;
+    image-rendering: pixelated;
 }
 
 #score {
     font-size: 1.5rem;
     margin-top: 20px;
-}
-
-.fireworks {
-    display: none;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
 }
