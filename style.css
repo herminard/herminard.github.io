@@ -47,8 +47,8 @@ canvas {
 }
 
 .dpad-up, .dpad-down, .dpad-left, .dpad-right {
-    width: 40px;
-    height: 40px;
+    width: 60px;
+    height: 60px;
     background-color: #444;
     color: white;
     display: flex;
@@ -70,8 +70,8 @@ canvas {
 }
 
 .button {
-    width: 60px;
-    height: 60px;
+    width: 80px;
+    height: 80px;
     background-color: #444;
     color: white;
     display: flex;
