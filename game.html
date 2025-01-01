@@ -5,15 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Load That Truck</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
         body {
             margin: 0;
             background-color: black;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
             height: 100vh;
             color: white;
             font-family: 'Courier New', Courier, monospace;
+        }
+
+        h1 {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 32px;
+            margin: 20px 0;
         }
 
         canvas {
@@ -51,6 +59,7 @@
     </style>
 </head>
 <body>
+    <h1>Load That Truck</h1>
     <canvas id="gameCanvas" width="400" height="400"></canvas>
     <div class="controls">
         <div class="button" id="up">▲</div>
