@@ -64,6 +64,13 @@ document.querySelector('.dpad-right').addEventListener('click', () => { player.x
 document.querySelector('.a-button').addEventListener('click', () => { /* Add functionality for A button */ });
 document.querySelector('.b-button').addEventListener('click', () => { /* Add functionality for B button */ });
 
+document.querySelector('.dpad-up').addEventListener('touchstart', () => { player.y -= gridSize; update(); });
+document.querySelector('.dpad-down').addEventListener('touchstart', () => { player.y += gridSize; update(); });
+document.querySelector('.dpad-left').addEventListener('touchstart', () => { player.x -= gridSize; update(); });
+document.querySelector('.dpad-right').addEventListener('touchstart', () => { player.x += gridSize; update(); });
+document.querySelector('.a-button').addEventListener('touchstart', () => { /* Add functionality for A button */ });
+document.querySelector('.b-button').addEventListener('touchstart', () => { /* Add functionality for B button */ });
+
 function gameLoop() {
     if (keys['ArrowUp'] || keys['w']) player.y -= gridSize;
     if (keys['ArrowDown'] || keys['s']) player.y += gridSize;
