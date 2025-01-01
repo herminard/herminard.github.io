@@ -22,6 +22,7 @@
             font-family: 'Press Start 2P', cursive;
             font-size: 32px;
             margin: 20px 0;
+            z-index: 999; /* Ensure title is above other elements */
         }
 
         canvas {
@@ -56,6 +57,18 @@
         .button:active {
             background-color: #666;
         }
+
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: #FFC107;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            z-index: 1000; /* Ensure back button is above other elements */
+        }
     </style>
 </head>
 <body>
@@ -67,7 +80,7 @@
         <div class="button" id="down">▼</div>
         <div class="button" id="right">▶</div>
     </div>
-    <button onclick="window.location.href='index.html'" style="position: absolute; top: 20px; left: 20px; background-color: #FFC107; color: white; border: none; padding: 10px 20px; border-radius: 5px;">Back</button>
+    <button onclick="window.location.href='index.html'" class="back-button">Back</button>
     <script>
         const canvas = document.getElementById('gameCanvas');
         const ctx = canvas.getContext('2d');
