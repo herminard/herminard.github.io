@@ -2,28 +2,155 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Load That Truck</title>
-    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            margin: 0;
+            background-color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: white;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        canvas {
+            background: #222;
+            border: 5px solid #fff;
+            image-rendering: pixelated;
+        }
+
+        .controls {
+            position: absolute;
+            bottom: 20px;
+            display: flex;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .button {
+            width: 60px;
+            height: 60px;
+            margin: 5px;
+            background-color: #444;
+            color: white;
+            font-size: 24px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10px;
+            border: 2px solid white;
+            user-select: none;
+        }
+
+        .button:active {
+            background-color: #666;
+        }
+    </style>
 </head>
 <body>
-    <h1>Load That Truck</h1>
-    <canvas id="gameCanvas" width="600" height="600"></canvas>
+    <canvas id="gameCanvas" width="400" height="400"></canvas>
     <div class="controls">
-        <div class="speed-controls">
-            <button id="speedDown">- Speed</button>
-            <button id="speedUp">+ Speed</button>
-        </div>
-        <div class="direction-controls">
-            <button id="moveUp">Up</button>
-            <div class="dpad-middle">
-                <button id="moveLeft">Left</button>
-                <button id="moveRight">Right</button>
-            </div>
-            <button id="moveDown">Down</button>
-        </div>
+        <div class="button" id="up">▲</div>
+        <div class="button" id="left">◀</div>
+        <div class="button" id="down">▼</div>
+        <div class="button" id="right">▶</div>
     </div>
-    <div id="score">Score: 0</div>
-    <script src="script.js"></script>
+    <button onclick="window.location.href='index.html'" style="position: absolute; top: 20px; left: 20px; background-color: #FFC107; color: white; border: none; padding: 10px 20px; border-radius: 5px;">Back</button>
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // Game Variables
+        const gridSize = 20;
+        const truckWidth = gridSize * 3;
+        const truckHeight = gridSize * 2;
+        let player = { x: gridSize * 5, y: gridSize * 5, width: gridSize, height: gridSize };
+        let truck = { x: gridSize * 10, y: gridSize * 10, width: truckWidth, height: truckHeight };
+        let obstacles = [
+            { x: gridSize * 8, y: gridSize * 7, width: gridSize, height: gridSize },
+            { x: gridSize * 6, y: gridSize * 10, width: gridSize, height: gridSize },
+        ];
+        let score = 0;
+
+        function draw() {
+            // Clear Canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Draw Truck
+            ctx.fillStyle = 'red';
+            ctx.fillRect(truck.x, truck.y, truck.width, truck.height);
+
+            // Draw Obstacles
+            ctx.fillStyle = 'gray';
+            obstacles.forEach(obstacle => {
+                ctx.fillRect(obstacle.x, obstacle.y, obstacle.width, obstacle.height);
+            });
+
+            // Draw Player
+            ctx.fillStyle = 'blue';
+            ctx.fillRect(player.x, player.y, player.width, player.height);
+
+            // Draw Score
+            ctx.fillStyle = 'white';
+            ctx.font = '20px Courier New';
+            ctx.fillText(`Score: ${score}`, 10, 30);
+        }
+
+        function checkCollision(rect1, rect2) {
+            return (
+                rect1.x < rect2.x + rect2.width &&
+                rect1.x + rect1.width > rect2.x &&
+                rect1.y < rect2.y + rect2.height &&
+                rect1.y + rect1.height > rect2.y
+            );
+        }
+
+        function resetPlayer() {
+            player.x = gridSize * 5;
+            player.y = gridSize * 5;
+        }
+
+        function update() {
+            if (checkCollision(player, truck)) {
+                score += 100;
+                resetPlayer();
+
+                if (score >= 1000) {
+                    alert('You're Hired!');
+                    score = 0;
+                }
+            }
+
+            draw();
+        }
+
+        // Input Handling
+        const keys = {};
+        document.addEventListener('keydown', e => keys[e.key] = true);
+        document.addEventListener('keyup', e => keys[e.key] = false);
+
+        function gameLoop() {
+            if (keys['ArrowUp'] || keys['w']) player.y -= gridSize;
+            if (keys['ArrowDown'] || keys['s']) player.y += gridSize;
+            if (keys['ArrowLeft'] || keys['a']) player.x -= gridSize;
+            if (keys['ArrowRight'] || keys['d']) player.x += gridSize;
+
+            update();
+            setTimeout(gameLoop, 200);
+        }
+
+        // Mobile Controls
+        document.getElementById('up').addEventListener('click', () => player.y -= gridSize);
+        document.getElementById('down').addEventListener('click', () => player.y += gridSize);
+        document.getElementById('left').addEventListener('click', () => player.x -= gridSize);
+        document.getElementById('right').addEventListener('click', () => player.x += gridSize);
+
+        // Start the Game
+        draw();
+        gameLoop();
+    </script>
 </body>
 </html>
