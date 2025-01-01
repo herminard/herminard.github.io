@@ -4,83 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Load That Truck</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
-
-        body {
-            margin: 0;
-            background-color: black;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            height: 100vh;
-            color: white;
-            font-family: 'Courier New', Courier, monospace;
-        }
-
-        h1 {
-            font-family: 'Press Start 2P', cursive;
-            font-size: 32px;
-            margin: 20px 0;
-            z-index: 999; /* Ensure title is above other elements */
-        }
-
-        canvas {
-            background: #222;
-            border: 5px solid #fff;
-            image-rendering: pixelated;
-        }
-
-        .controls {
-            position: absolute;
-            bottom: 20px;
-            display: flex;
-            justify-content: center;
-            width: 100%;
-        }
-
-        .button {
-            width: 60px;
-            height: 60px;
-            margin: 5px;
-            background-color: #444;
-            color: white;
-            font-size: 24px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 10px;
-            border: 2px solid white;
-            user-select: none;
-        }
-
-        .button:active {
-            background-color: #666;
-        }
-
-        .back-button {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            background-color: #FFC107;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            z-index: 1000; /* Ensure back button is above other elements */
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <h1>Load That Truck</h1>
     <canvas id="gameCanvas" width="400" height="400"></canvas>
-    <div class="controls">
-        <div class="button" id="up">▲</div>
-        <div class="button" id="left">◀</div>
-        <div class="button" id="down">▼</div>
-        <div class="button" id="right">▶</div>
-    </div>
-    <button onclick="window.location.href='index.html'" class="back-button">Back</button>
     <div id="score">Score: 0</div>
     <script src="script.js"></script>
 </body>
