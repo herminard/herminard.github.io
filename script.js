@@ -57,6 +57,13 @@ const keys = {};
 document.addEventListener('keydown', e => keys[e.key] = true);
 document.addEventListener('keyup', e => keys[e.key] = false);
 
+document.querySelector('.dpad-up').addEventListener('click', () => { player.y -= gridSize; update(); });
+document.querySelector('.dpad-down').addEventListener('click', () => { player.y += gridSize; update(); });
+document.querySelector('.dpad-left').addEventListener('click', () => { player.x -= gridSize; update(); });
+document.querySelector('.dpad-right').addEventListener('click', () => { player.x += gridSize; update(); });
+document.querySelector('.a-button').addEventListener('click', () => { /* Add functionality for A button */ });
+document.querySelector('.b-button').addEventListener('click', () => { /* Add functionality for B button */ });
+
 function gameLoop() {
     if (keys['ArrowUp'] || keys['w']) player.y -= gridSize;
     if (keys['ArrowDown'] || keys['s']) player.y += gridSize;
