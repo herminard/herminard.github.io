@@ -4,12 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Load That Truck</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <h1>Load That Truck</h1>
     <canvas id="gameCanvas" width="400" height="400"></canvas>
     <div id="score">Score: 0</div>
+    <div class="controls">
+        <div class="dpad">
+            <div class="dpad-up">▲</div>
+            <div class="dpad-middle">
+                <div class="dpad-left">◀</div>
+                <div class="dpad-right">▶</div>
+            </div>
+            <div class="dpad-down">▼</div>
+        </div>
+        <div class="buttons">
+            <div class="button a-button">A</div>
+            <div class="button b-button">B</div>
+        </div>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>
