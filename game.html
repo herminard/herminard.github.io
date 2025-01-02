@@ -45,6 +45,7 @@
             text-align: center;
             line-height: 60px;
             border-radius: 10px;
+            user-select: none;
         }
 
         #score {
@@ -60,6 +61,15 @@
             font-size: 2em;
             margin: 20px 0;
         }
+
+        #message {
+            font-size: 1.5em;
+            position: absolute;
+            top: 200px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -72,18 +82,25 @@
         <div class="button" id="up">▲</div>
         <div class="button" id="down">▼</div>
     </div>
+    <div id="message"></div>
+
     <script>
         const canvas = document.getElementById('gameCanvas');
         const ctx = canvas.getContext('2d');
         const scoreElement = document.getElementById('score');
+        const messageElement = document.getElementById('message');
 
         const player = { x: 10, y: 10, size: 20, color: 'blue' };
         const truck = { x: 260, y: 440, width: 60, height: 40, color: 'red' };
         const obstacles = [
-            { x: 100, y: 200, width: 30, height: 30, color: 'gray' },
-            { x: 150, y: 300, width: 50, height: 50, color: 'gray' }
+            { x: 100, y: 200, size: 20, color: 'gray', direction: 1 },  // Human-like figure 1
+            { x: 150, y: 300, size: 20, color: 'green', direction: -1 },  // Human-like figure 2
+            { x: 50, y: 100, size: 20, color: 'yellow', direction: 1 }, // Human-like figure 3
+            { x: 180, y: 80, size: 20, color: 'orange', direction: -1 }, // Human-like figure 4
         ];
-        const gameState = { score: 0, won: false };
+        const gameState = { score: 0, won: false, collision: false };
+
+        let moveInterval = null;
 
         function drawPlayer() {
             ctx.fillStyle = player.color;
@@ -101,19 +118,35 @@
 
         function drawObstacles() {
             obstacles.forEach(obstacle => {
+                // Draw human-like figure as a simple shape
                 ctx.fillStyle = obstacle.color;
-                ctx.fillRect(obstacle.x, obstacle.y, obstacle.width, obstacle.height);
+                ctx.fillRect(obstacle.x, obstacle.y, obstacle.size, obstacle.size); // Body
+                ctx.beginPath();
+                ctx.arc(obstacle.x + obstacle.size / 2, obstacle.y - 10, 10, 0, Math.PI * 2); // Head
+                ctx.fill();
+            });
+        }
+
+        function moveObstacles() {
+            obstacles.forEach(obstacle => {
+                obstacle.x += obstacle.direction * 2;
+
+                // Reverse direction if they hit the canvas borders
+                if (obstacle.x < 0 || obstacle.x + obstacle.size > canvas.width) {
+                    obstacle.direction *= -1;
+                }
             });
         }
 
         function detectCollision() {
             for (const obstacle of obstacles) {
                 if (
-                    player.x < obstacle.x + obstacle.width &&
+                    player.x < obstacle.x + obstacle.size &&
                     player.x + player.size > obstacle.x &&
-                    player.y < obstacle.y + obstacle.height &&
+                    player.y < obstacle.y + obstacle.size &&
                     player.y + player.size > obstacle.y
                 ) {
+                    gameState.collision = true;
                     return true;
                 }
             }
@@ -132,7 +165,8 @@
                 resetPlayer();
 
                 if (gameState.score >= 500) {
-                    alert('YOU ARE HIRED!');
+                    messageElement.textContent = 'YOU ARE HIRED!';
+                    messageElement.style.color = 'green';
                     gameState.won = true;
                 }
             }
@@ -141,6 +175,8 @@
         function resetPlayer() {
             player.x = 10;
             player.y = 10;
+            gameState.collision = false;
+            messageElement.textContent = '';
         }
 
         function updateGame() {
@@ -148,6 +184,16 @@
             drawPlayer();
             drawTruck();
             drawObstacles();
+
+            if (gameState.collision) {
+                messageElement.textContent = 'MISSION FAILED!';
+                messageElement.style.color = 'red';
+                setTimeout(() => {
+                    resetPlayer();
+                }, 1000);
+            } else {
+                detectWin();
+            }
         }
 
         function movePlayer(dx, dy) {
@@ -156,20 +202,41 @@
                 player.y += dy;
 
                 if (detectCollision()) {
-                    alert('Collision detected!');
-                    resetPlayer();
+                    updateGame();
+                    return;
                 }
-                detectWin();
                 updateGame();
             }
         }
 
-        document.getElementById('left').addEventListener('click', () => movePlayer(-20, 0));
-        document.getElementById('right').addEventListener('click', () => movePlayer(20, 0));
-        document.getElementById('up').addEventListener('click', () => movePlayer(0, -20));
-        document.getElementById('down').addEventListener('click', () => movePlayer(0, 20));
+        function startMoving(dx, dy) {
+            if (moveInterval === null) {
+                moveInterval = setInterval(() => movePlayer(dx, dy), 100);
+            }
+        }
 
-        updateGame();
+        function stopMoving() {
+            clearInterval(moveInterval);
+            moveInterval = null;
+        }
+
+        document.getElementById('left').addEventListener('mousedown', () => startMoving(-20, 0));
+        document.getElementById('right').addEventListener('mousedown', () => startMoving(20, 0));
+        document.getElementById('up').addEventListener('mousedown', () => startMoving(0, -20));
+        document.getElementById('down').addEventListener('mousedown', () => startMoving(0, 20));
+
+        document.getElementById('left').addEventListener('mouseup', stopMoving);
+        document.getElementById('right').addEventListener('mouseup', stopMoving);
+        document.getElementById('up').addEventListener('mouseup', stopMoving);
+        document.getElementById('down').addEventListener('mouseup', stopMoving);
+
+        function gameLoop() {
+            moveObstacles();
+            updateGame();
+            requestAnimationFrame(gameLoop);
+        }
+
+        gameLoop();
     </script>
 </body>
 </html>
