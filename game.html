@@ -9,16 +9,11 @@
             margin: 0;
             background-color: #222;
             color: #fff;
-            font-family: 'Press Start 2P', cursive;
+            font-family: Arial, sans-serif; /* Changed font to a more normal one */
             display: flex;
             flex-direction: column;
             align-items: center;
             overflow: hidden;
-        }
-
-        @font-face {
-            font-family: 'Press Start 2P';
-            src: url('https://fonts.gstatic.com/s/pressstart2p/v11/7cHpv4kjgoGqM7E3b8ACwSAlZs_eOgg.ttf') format('truetype');
         }
 
         canvas {
@@ -70,6 +65,25 @@
             left: 50%;
             transform: translateX(-50%);
             text-align: center;
+        }
+
+        /* Blood effect */
+        .blood {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: red;
+            border-radius: 50%;
+            animation: blood-drip 1s linear infinite;
+        }
+
+        @keyframes blood-drip {
+            0% {
+                top: -10px;
+            }
+            100% {
+                top: 30px;
+            }
         }
     </style>
 </head>
@@ -145,6 +159,16 @@
             });
         }
 
+        function createBlood(x, y) {
+            const blood = document.createElement('div');
+            blood.classList.add('blood');
+            blood.style.left = `${x + 5}px`;
+            blood.style.top = `${y + 5}px`;
+            document.body.appendChild(blood);
+
+            setTimeout(() => blood.remove(), 1000);
+        }
+
         function detectCollision() {
             for (const obstacle of obstacles) {
                 if (
@@ -154,6 +178,23 @@
                     player.y + player.size > obstacle.y
                 ) {
                     gameState.collision = true;
+                    createBlood(obstacle.x, obstacle.y);
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        function detectHumanTruckCollision() {
+            for (const obstacle of obstacles) {
+                if (
+                    truck.x < obstacle.x + obstacle.size &&
+                    truck.x + truck.width > obstacle.x &&
+                    truck.y < obstacle.y + obstacle.size &&
+                    truck.y + truck.height > obstacle.y
+                ) {
+                    gameState.collision = true;
+                    createBlood(obstacle.x, obstacle.y);
                     return true;
                 }
             }
@@ -193,7 +234,7 @@
             drawObstacles();
 
             if (gameState.collision) {
-                messageElement.textContent = 'MISSION FAILED!';
+                messageElement.textContent = 'TASK FAILED!';
                 messageElement.style.color = 'red';
                 setTimeout(() => {
                     resetPlayer();
@@ -208,7 +249,7 @@
                 player.x += dx;
                 player.y += dy;
 
-                if (detectCollision()) {
+                if (detectCollision() || detectHumanTruckCollision()) {
                     updateGame();
                     return;
                 }
