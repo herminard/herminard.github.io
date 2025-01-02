@@ -7,8 +7,13 @@ truckImage.onload = function() {
     const canvas = document.getElementById('gameCanvas');
     const ctx = canvas.getContext('2d');
 
+    // Redimensionner l'image à 80% de sa taille d'origine
+    const scale = 0.8;
+    const scaledWidth = truckImage.width * scale;
+    const scaledHeight = truckImage.height * scale;
+
     // Exemple de dessin de l'image du camion au centre du canevas
-    const truckX = canvas.width / 2 - truckImage.width / 2;
-    const truckY = canvas.height / 2 - truckImage.height / 2;
-    ctx.drawImage(truckImage, truckX, truckY);
+    const truckX = canvas.width / 2 - scaledWidth / 2;
+    const truckY = canvas.height / 2 - scaledHeight / 2;
+    ctx.drawImage(truckImage, truckX, truckY, scaledWidth, scaledHeight);
 };
