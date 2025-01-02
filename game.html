@@ -118,7 +118,7 @@
 
     <!-- Background music -->
     <audio id="bgMusic" loop autoplay>
-        <source src="Rising_Bones_-_Mr._Rock (1).mp3" type="audio/mp3">
+        <source src="path-to-your-music-file.mp3" type="audio/mp3">
         Your browser does not support the audio tag.
     </audio>
 
@@ -292,4 +292,29 @@
 
         // Add touch event listeners for mobile support
         const controls = document.querySelectorAll('.button');
-        c
+        controls.forEach(button => {
+            button.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                const buttonId = e.target.id;
+                if (buttonId === 'left') startMoving(-20, 0);
+                if (buttonId === 'right') startMoving(20, 0);
+                if (buttonId === 'up') startMoving(0, -20);
+                if (buttonId === 'down') startMoving(0, 20);
+            });
+
+            button.addEventListener('touchend', (e) => {
+                e.preventDefault();
+                stopMoving();
+            });
+        });
+
+        function gameLoop() {
+            moveObstacles();
+            updateGame();
+            requestAnimationFrame(gameLoop);
+        }
+
+        gameLoop();
+    </script>
+</body>
+</html>
