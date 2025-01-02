@@ -9,7 +9,7 @@
             margin: 0;
             background-color: #222;
             color: #fff;
-            font-family: Arial, sans-serif; /* Changed font to a more normal one */
+            font-family: Arial, sans-serif; /* Normal font */
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -67,11 +67,10 @@
             text-align: center;
         }
 
-        /* Blood effect */
         .blood {
             position: absolute;
-            width: 10px;
-            height: 10px;
+            width: 15px;
+            height: 15px;
             background-color: red;
             border-radius: 50%;
             animation: blood-drip 1s linear infinite;
@@ -84,6 +83,21 @@
             100% {
                 top: 30px;
             }
+        }
+
+        /* Trophy background effect */
+        #trophy {
+            position: absolute;
+            top: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: none;
+            z-index: 10;
+        }
+
+        #trophy img {
+            width: 100px;
+            height: 100px;
         }
     </style>
 </head>
@@ -98,7 +112,10 @@
         <div class="button" id="down">▼</div>
     </div>
     <div id="message"></div>
-    
+    <div id="trophy">
+        <img src="trophy-icon.png" alt="Trophy" />
+    </div>
+
     <!-- Background music -->
     <audio id="bgMusic" loop autoplay>
         <source src="path-to-your-music-file.mp3" type="audio/mp3">
@@ -110,6 +127,7 @@
         const ctx = canvas.getContext('2d');
         const scoreElement = document.getElementById('score');
         const messageElement = document.getElementById('message');
+        const trophyElement = document.getElementById('trophy');
 
         const player = { x: 10, y: 10, size: 20, color: 'blue' };
         const truck = { x: 260, y: 440, width: 60, height: 40, color: 'red' };
@@ -160,13 +178,15 @@
         }
 
         function createBlood(x, y) {
-            const blood = document.createElement('div');
-            blood.classList.add('blood');
-            blood.style.left = `${x + 5}px`;
-            blood.style.top = `${y + 5}px`;
-            document.body.appendChild(blood);
+            for (let i = 0; i < 10; i++) {
+                const blood = document.createElement('div');
+                blood.classList.add('blood');
+                blood.style.left = `${x + (Math.random() * 30 - 15)}px`; // Spread blood around
+                blood.style.top = `${y + (Math.random() * 30 - 15)}px`;
+                document.body.appendChild(blood);
 
-            setTimeout(() => blood.remove(), 1000);
+                setTimeout(() => blood.remove(), 1000);
+            }
         }
 
         function detectCollision() {
@@ -215,6 +235,7 @@
                 if (gameState.score >= 500) {
                     messageElement.textContent = 'YOU ARE HIRED!';
                     messageElement.style.color = 'green';
+                    trophyElement.style.display = 'block';
                     gameState.won = true;
                 }
             }
@@ -225,6 +246,7 @@
             player.y = 10;
             gameState.collision = false;
             messageElement.textContent = '';
+            trophyElement.style.display = 'none'; // Hide the trophy after reset
         }
 
         function updateGame() {
@@ -270,29 +292,4 @@
 
         // Add touch event listeners for mobile support
         const controls = document.querySelectorAll('.button');
-        controls.forEach(button => {
-            button.addEventListener('touchstart', (e) => {
-                e.preventDefault();
-                const buttonId = e.target.id;
-                if (buttonId === 'left') startMoving(-20, 0);
-                if (buttonId === 'right') startMoving(20, 0);
-                if (buttonId === 'up') startMoving(0, -20);
-                if (buttonId === 'down') startMoving(0, 20);
-            });
-
-            button.addEventListener('touchend', (e) => {
-                e.preventDefault();
-                stopMoving();
-            });
-        });
-
-        function gameLoop() {
-            moveObstacles();
-            updateGame();
-            requestAnimationFrame(gameLoop);
-        }
-
-        gameLoop();
-    </script>
-</body>
-</html>
+        c
