@@ -1,87 +1,47 @@
 body {
-    font-family: 'Press Start 2P', cursive;
-    background-color: #101820;
-    color: #F2F2F2;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
     height: 100vh;
     margin: 0;
-    overflow: hidden;
 }
 
-h1 {
-    font-size: 2rem;
-    color: #FFC107;
-    text-transform: uppercase;
-    margin: 20px 0;
-}
-
-canvas {
-    border: 2px solid #F2F2F2;
-    background-color: #222;
-    image-rendering: pixelated;
-}
-
-#score {
-    font-size: 1.5rem;
-    margin-top: 20px;
+#gameCanvas {
+    border: 1px solid black;
 }
 
 .controls {
     display: flex;
-    justify-content: space-between;
-    width: 100%;
-    max-width: 600px;
+    flex-direction: column;
+    align-items: center;
     margin-top: 20px;
+}
+
+.gameboy-buttons {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
     position: absolute;
     bottom: 10px;
 }
 
-.dpad {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.dpad-up, .dpad-down, .dpad-left, .dpad-right {
-    width: 80px;
-    height: 80px;
-    background-color: #444;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 10px;
-    margin: 5px;
-}
-
-.dpad-middle {
-    display: flex;
-    gap: 5px;
-}
-
-.buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
 .button {
-    width: 100px;
-    height: 100px;
-    background-color: #444;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    width: 40px; /* Adjust the size as needed */
+    height: 40px;
+    background-color: #6c6c6c;
     border-radius: 50%;
-    border: 2px solid white;
-    user-select: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 20px;
+    font-family: 'Arial', sans-serif;
+    cursor: pointer;
+    box-shadow: 0px 4px 0px #3c3c3c;
 }
 
 .button:active {
-    background-color: #666;
+    box-shadow: 0px 2px 0px #3c3c3c;
+    transform: translateY(2px);
 }
