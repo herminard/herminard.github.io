@@ -46,6 +46,7 @@
             line-height: 60px;
             border-radius: 10px;
             user-select: none;
+            touch-action: none;
         }
 
         #score {
@@ -83,6 +84,12 @@
         <div class="button" id="down">▼</div>
     </div>
     <div id="message"></div>
+    
+    <!-- Background music -->
+    <audio id="bgMusic" loop autoplay>
+        <source src="path-to-your-music-file.mp3" type="audio/mp3">
+        Your browser does not support the audio tag.
+    </audio>
 
     <script>
         const canvas = document.getElementById('gameCanvas');
@@ -220,15 +227,23 @@
             moveInterval = null;
         }
 
-        document.getElementById('left').addEventListener('mousedown', () => startMoving(-20, 0));
-        document.getElementById('right').addEventListener('mousedown', () => startMoving(20, 0));
-        document.getElementById('up').addEventListener('mousedown', () => startMoving(0, -20));
-        document.getElementById('down').addEventListener('mousedown', () => startMoving(0, 20));
+        // Add touch event listeners for mobile support
+        const controls = document.querySelectorAll('.button');
+        controls.forEach(button => {
+            button.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                const buttonId = e.target.id;
+                if (buttonId === 'left') startMoving(-20, 0);
+                if (buttonId === 'right') startMoving(20, 0);
+                if (buttonId === 'up') startMoving(0, -20);
+                if (buttonId === 'down') startMoving(0, 20);
+            });
 
-        document.getElementById('left').addEventListener('mouseup', stopMoving);
-        document.getElementById('right').addEventListener('mouseup', stopMoving);
-        document.getElementById('up').addEventListener('mouseup', stopMoving);
-        document.getElementById('down').addEventListener('mouseup', stopMoving);
+            button.addEventListener('touchend', (e) => {
+                e.preventDefault();
+                stopMoving();
+            });
+        });
 
         function gameLoop() {
             moveObstacles();
