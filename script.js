@@ -8,7 +8,7 @@ truckImage.onload = function() {
     const ctx = canvas.getContext('2d');
 
     // Redimensionner l'image à 80% de sa taille d'origine
-    const scale = 0.2;
+    const scale = 0.8;
     const scaledWidth = truckImage.width * scale;
     const scaledHeight = truckImage.height * scale;
 
