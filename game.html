@@ -4,26 +4,172 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Load That Truck</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            margin: 0;
+            background-color: #222;
+            color: #fff;
+            font-family: 'Press Start 2P', cursive;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        @font-face {
+            font-family: 'Press Start 2P';
+            src: url('https://fonts.gstatic.com/s/pressstart2p/v11/7cHpv4kjgoGqM7E3b8ACwSAlZs_eOgg.ttf') format('truetype');
+        }
+
+        canvas {
+            border: 2px solid #fff;
+            margin-top: 10px;
+        }
+
+        #game-controls {
+            position: fixed;
+            bottom: 10px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .button {
+            background-color: #444;
+            border: 2px solid #fff;
+            color: #fff;
+            font-size: 1.2em;
+            width: 60px;
+            height: 60px;
+            text-align: center;
+            line-height: 60px;
+            border-radius: 10px;
+        }
+
+        #score {
+            font-size: 1.2em;
+            position: fixed;
+            top: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+        }
+
+        #title {
+            font-size: 2em;
+            margin: 20px 0;
+        }
+    </style>
 </head>
 <body>
-    <h1>Load That Truck</h1>
-    <canvas id="gameCanvas" width="400" height="400"></canvas>
+    <div id="title">LOAD THAT TRUCK</div>
     <div id="score">Score: 0</div>
-    <div class="controls">
-        <div class="dpad">
-            <div class="dpad-up">▲</div>
-            <div class="dpad-middle">
-                <div class="dpad-left">◀</div>
-                <div class="dpad-right">▶</div>
-            </div>
-            <div class="dpad-down">▼</div>
-        </div>
-        <div class="buttons">
-            <div class="button a-button">A</div>
-            <div class="button b-button">B</div>
-        </div>
+    <canvas id="gameCanvas" width="320" height="480"></canvas>
+    <div id="game-controls">
+        <div class="button" id="left">◄</div>
+        <div class="button" id="right">►</div>
+        <div class="button" id="up">▲</div>
+        <div class="button" id="down">▼</div>
     </div>
-    <script src="script.js"></script>
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        const scoreElement = document.getElementById('score');
+
+        const player = { x: 10, y: 10, size: 20, color: 'blue' };
+        const truck = { x: 260, y: 440, width: 60, height: 40, color: 'red' };
+        const obstacles = [
+            { x: 100, y: 200, width: 30, height: 30, color: 'gray' },
+            { x: 150, y: 300, width: 50, height: 50, color: 'gray' }
+        ];
+        const gameState = { score: 0, won: false };
+
+        function drawPlayer() {
+            ctx.fillStyle = player.color;
+            ctx.fillRect(player.x, player.y, player.size, player.size);
+        }
+
+        function drawTruck() {
+            ctx.fillStyle = truck.color;
+            ctx.fillRect(truck.x, truck.y, truck.width, truck.height);
+            ctx.fillStyle = 'black';
+            ctx.fillRect(truck.x + 10, truck.y - 10, truck.width - 20, 10); // Windshield
+            ctx.fillStyle = 'white';
+            ctx.fillRect(truck.x + 15, truck.y + 10, truck.width - 30, 10); // Front grille
+        }
+
+        function drawObstacles() {
+            obstacles.forEach(obstacle => {
+                ctx.fillStyle = obstacle.color;
+                ctx.fillRect(obstacle.x, obstacle.y, obstacle.width, obstacle.height);
+            });
+        }
+
+        function detectCollision() {
+            for (const obstacle of obstacles) {
+                if (
+                    player.x < obstacle.x + obstacle.width &&
+                    player.x + player.size > obstacle.x &&
+                    player.y < obstacle.y + obstacle.height &&
+                    player.y + player.size > obstacle.y
+                ) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        function detectWin() {
+            if (
+                player.x < truck.x + truck.width &&
+                player.x + player.size > truck.x &&
+                player.y < truck.y + truck.height &&
+                player.y + player.size > truck.y
+            ) {
+                gameState.score += 100;
+                scoreElement.textContent = `Score: ${gameState.score}`;
+                resetPlayer();
+
+                if (gameState.score >= 500) {
+                    alert('YOU ARE HIRED!');
+                    gameState.won = true;
+                }
+            }
+        }
+
+        function resetPlayer() {
+            player.x = 10;
+            player.y = 10;
+        }
+
+        function updateGame() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            drawPlayer();
+            drawTruck();
+            drawObstacles();
+        }
+
+        function movePlayer(dx, dy) {
+            if (!gameState.won) {
+                player.x += dx;
+                player.y += dy;
+
+                if (detectCollision()) {
+                    alert('Collision detected!');
+                    resetPlayer();
+                }
+                detectWin();
+                updateGame();
+            }
+        }
+
+        document.getElementById('left').addEventListener('click', () => movePlayer(-20, 0));
+        document.getElementById('right').addEventListener('click', () => movePlayer(20, 0));
+        document.getElementById('up').addEventListener('click', () => movePlayer(0, -20));
+        document.getElementById('down').addEventListener('click', () => movePlayer(0, 20));
+
+        updateGame();
+    </script>
 </body>
 </html>
