@@ -138,28 +138,29 @@
         const gameState = { score: 0, won: false, collision: false };
 
         let moveInterval = null;
-
-       function drawPlayer() {
+function drawPlayer() {
     // Draw body
     ctx.fillStyle = 'blue';
     ctx.fillRect(player.x, player.y, player.size, player.size);
 
     // Draw head
     ctx.beginPath();
-    ctx.arc(player.x + player.size / 2, player.y - 10, 10, 0, Math.PI * 2);
+    const headX = player.x + player.size / 2;
+    const headY = player.y - 10 + (player.dy > 0 ? 5 : player.dy < 0 ? -5 : 0); // Adjust head position based on movement
+    ctx.arc(headX, headY, 10, 0, Math.PI * 2);
     ctx.fillStyle = 'peachpuff';
     ctx.fill();
 
     // Draw eyes
     ctx.beginPath();
-    ctx.arc(player.x + player.size / 2 - 5, player.y - 15, 2, 0, Math.PI * 2); // Left eye
-    ctx.arc(player.x + player.size / 2 + 5, player.y - 15, 2, 0, Math.PI * 2); // Right eye
+    ctx.arc(headX - 5, headY - 5, 2, 0, Math.PI * 2); // Left eye
+    ctx.arc(headX + 5, headY - 5, 2, 0, Math.PI * 2); // Right eye
     ctx.fillStyle = 'black';
     ctx.fill();
 
     // Draw smile
     ctx.beginPath();
-    ctx.arc(player.x + player.size / 2, player.y - 10, 5, 0, Math.PI);
+    ctx.arc(headX, headY, 5, 0, Math.PI);
     ctx.strokeStyle = 'black';
     ctx.stroke();
 
@@ -172,6 +173,8 @@
     ctx.fillStyle = 'brown';
     ctx.fillRect(player.x + player.size, player.y, player.size, player.size);
 }
+     
+
 
         function drawTruck() {
             ctx.fillStyle = truck.color;
@@ -319,18 +322,20 @@
             }
         }
 
-        function movePlayer(dx, dy) {
-            if (!gameState.won) {
-                player.x += dx;
-                player.y += dy;
+      function movePlayer(dx, dy) {
+    if (!gameState.won) {
+        player.x += dx;
+        player.y += dy;
+        player.dx = dx; // Store the horizontal movement direction
+        player.dy = dy; // Store the vertical movement direction
 
-                if (detectCollision() || detectHumanTruckCollision()) {
-                    updateGame();
-                    return;
-                }
-                updateGame();
-            }
+        if (detectCollision() || detectHumanTruckCollision()) {
+            updateGame();
+            return;
         }
+        updateGame();
+    }
+}
 
         function startMoving(dx, dy) {
             if (moveInterval === null) {
