@@ -9,7 +9,7 @@
             margin: 0;
             background-color: #222;
             color: #fff;
-            font-family: Arial, sans-serif; /* Normal font */
+            font-family: Arial, sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -85,7 +85,6 @@
             }
         }
 
-        /* Trophy background effect */
         #trophy {
             position: absolute;
             top: 100px;
@@ -116,7 +115,6 @@
         <img src="trophy-icon.png" alt="Trophy" />
     </div>
 
-    <!-- Background music -->
     <audio id="bgMusic" loop autoplay>
         <source src="path-to-your-music-file.mp3" type="audio/mp3">
         Your browser does not support the audio tag.
@@ -129,39 +127,54 @@
         const messageElement = document.getElementById('message');
         const trophyElement = document.getElementById('trophy');
 
-        const player = { x: 10, y: 10, size: 20, color: 'blue' };
+        const player = { x: 10, y: 10, size: 20 };
         const truck = { x: 260, y: 440, width: 60, height: 40, color: 'red' };
         const obstacles = [
-            { x: 100, y: 200, size: 20, color: 'gray', direction: 1 },  // Human-like figure 1
-            { x: 150, y: 300, size: 20, color: 'green', direction: -1 },  // Human-like figure 2
-            { x: 50, y: 100, size: 20, color: 'yellow', direction: 1 }, // Human-like figure 3
-            { x: 180, y: 80, size: 20, color: 'orange', direction: -1 }, // Human-like figure 4
+            { x: 100, y: 200, size: 20, color: 'gray', direction: 1 },
+            { x: 150, y: 300, size: 20, color: 'green', direction: -1 },
+            { x: 50, y: 100, size: 20, color: 'yellow', direction: 1 },
+            { x: 180, y: 80, size: 20, color: 'orange', direction: -1 },
         ];
         const gameState = { score: 0, won: false, collision: false };
 
         let moveInterval = null;
 
         function drawPlayer() {
-            ctx.fillStyle = player.color;
+            // Draw body
+            ctx.fillStyle = 'blue';
             ctx.fillRect(player.x, player.y, player.size, player.size);
+
+            // Draw head
+            ctx.beginPath();
+            ctx.arc(player.x + player.size / 2, player.y - 10, 10, 0, Math.PI * 2);
+            ctx.fillStyle = 'peachpuff';
+            ctx.fill();
+
+            // Draw arms pushing the box
+            ctx.fillStyle = 'blue';
+            ctx.fillRect(player.x - 5, player.y + 5, 5, 10); // Left arm
+            ctx.fillRect(player.x + player.size, player.y + 5, 5, 10); // Right arm
+
+            // Draw the box
+            ctx.fillStyle = 'brown';
+            ctx.fillRect(player.x + player.size, player.y, player.size, player.size);
         }
 
         function drawTruck() {
             ctx.fillStyle = truck.color;
             ctx.fillRect(truck.x, truck.y, truck.width, truck.height);
             ctx.fillStyle = 'black';
-            ctx.fillRect(truck.x + 10, truck.y - 10, truck.width - 20, 10); // Windshield
+            ctx.fillRect(truck.x + 10, truck.y - 10, truck.width - 20, 10);
             ctx.fillStyle = 'white';
-            ctx.fillRect(truck.x + 15, truck.y + 10, truck.width - 30, 10); // Front grille
+            ctx.fillRect(truck.x + 15, truck.y + 10, truck.width - 30, 10);
         }
 
         function drawObstacles() {
             obstacles.forEach(obstacle => {
-                // Draw human-like figure as a simple shape
                 ctx.fillStyle = obstacle.color;
-                ctx.fillRect(obstacle.x, obstacle.y, obstacle.size, obstacle.size); // Body
+                ctx.fillRect(obstacle.x, obstacle.y, obstacle.size, obstacle.size);
                 ctx.beginPath();
-                ctx.arc(obstacle.x + obstacle.size / 2, obstacle.y - 10, 10, 0, Math.PI * 2); // Head
+                ctx.arc(obstacle.x + obstacle.size / 2, obstacle.y - 10, 10, 0, Math.PI * 2);
                 ctx.fill();
             });
         }
@@ -169,8 +182,6 @@
         function moveObstacles() {
             obstacles.forEach(obstacle => {
                 obstacle.x += obstacle.direction * 2;
-
-                // Reverse direction if they hit the canvas borders
                 if (obstacle.x < 0 || obstacle.x + obstacle.size > canvas.width) {
                     obstacle.direction *= -1;
                 }
@@ -178,15 +189,44 @@
         }
 
         function createBlood(x, y) {
-            for (let i = 0; i < 10; i++) {
-                const blood = document.createElement('div');
-                blood.classList.add('blood');
-                blood.style.left = `${x + (Math.random() * 30 - 15)}px`; // Spread blood around
-                blood.style.top = `${y + (Math.random() * 30 - 15)}px`;
-                document.body.appendChild(blood);
+            const particles = [];
+            const particleCount = 100;
 
-                setTimeout(() => blood.remove(), 1000);
+            for (let i = 0; i < particleCount; i++) {
+                particles.push({
+                    x: x + player.size / 2,
+                    y: y + player.size / 2,
+                    dx: (Math.random() - 0.5) * 10,
+                    dy: Math.random() * 5 + 2,
+                    size: Math.random() * 5 + 2,
+                    life: Math.random() * 30 + 30
+                });
             }
+
+            function drawParticles() {
+                particles.forEach((particle, index) => {
+                    if (particle.life > 0) {
+                        ctx.beginPath();
+                        ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+                        ctx.fillStyle = 'red';
+                        ctx.fill();
+                        particle.x += particle.dx;
+                        particle.y += particle.dy;
+                        particle.life--;
+                    } else {
+                        particles.splice(index, 1);
+                    }
+                });
+            }
+
+            function animateBlood() {
+                if (particles.length > 0) {
+                    drawParticles();
+                    requestAnimationFrame(animateBlood);
+                }
+            }
+
+            animateBlood();
         }
 
         function detectCollision() {
@@ -246,7 +286,7 @@
             player.y = 10;
             gameState.collision = false;
             messageElement.textContent = '';
-            trophyElement.style.display = 'none'; // Hide the trophy after reset
+            trophyElement.style.display = 'none';
         }
 
         function updateGame() {
@@ -290,7 +330,6 @@
             moveInterval = null;
         }
 
-        // Add touch event listeners for mobile support
         const controls = document.querySelectorAll('.button');
         controls.forEach(button => {
             button.addEventListener('touchstart', (e) => {
