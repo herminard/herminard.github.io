@@ -139,26 +139,39 @@
 
         let moveInterval = null;
 
-        function drawPlayer() {
-            // Draw body
-            ctx.fillStyle = 'blue';
-            ctx.fillRect(player.x, player.y, player.size, player.size);
+       function drawPlayer() {
+    // Draw body
+    ctx.fillStyle = 'blue';
+    ctx.fillRect(player.x, player.y, player.size, player.size);
 
-            // Draw head
-            ctx.beginPath();
-            ctx.arc(player.x + player.size / 2, player.y - 10, 10, 0, Math.PI * 2);
-            ctx.fillStyle = 'peachpuff';
-            ctx.fill();
+    // Draw head
+    ctx.beginPath();
+    ctx.arc(player.x + player.size / 2, player.y - 10, 10, 0, Math.PI * 2);
+    ctx.fillStyle = 'peachpuff';
+    ctx.fill();
 
-            // Draw arms pushing the box
-            ctx.fillStyle = 'blue';
-            ctx.fillRect(player.x - 5, player.y + 5, 5, 10); // Left arm
-            ctx.fillRect(player.x + player.size, player.y + 5, 5, 10); // Right arm
+    // Draw eyes
+    ctx.beginPath();
+    ctx.arc(player.x + player.size / 2 - 5, player.y - 15, 2, 0, Math.PI * 2); // Left eye
+    ctx.arc(player.x + player.size / 2 + 5, player.y - 15, 2, 0, Math.PI * 2); // Right eye
+    ctx.fillStyle = 'black';
+    ctx.fill();
 
-            // Draw the box
-            ctx.fillStyle = 'brown';
-            ctx.fillRect(player.x + player.size, player.y, player.size, player.size);
-        }
+    // Draw smile
+    ctx.beginPath();
+    ctx.arc(player.x + player.size / 2, player.y - 10, 5, 0, Math.PI);
+    ctx.strokeStyle = 'black';
+    ctx.stroke();
+
+    // Draw arms pushing the box
+    ctx.fillStyle = 'blue';
+    ctx.fillRect(player.x - 5, player.y + 5, 5, 10); // Left arm
+    ctx.fillRect(player.x + player.size, player.y + 5, 5, 10); // Right arm
+
+    // Draw the box
+    ctx.fillStyle = 'brown';
+    ctx.fillRect(player.x + player.size, player.y, player.size, player.size);
+}
 
         function drawTruck() {
             ctx.fillStyle = truck.color;
