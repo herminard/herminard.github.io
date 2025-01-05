@@ -1,6 +1,6 @@
 function createBlood(x, y) {
     const particles = [];
-    const particleCount = 30; // Augmenter le nombre de particules
+    const particleCount = 100; // Augmenter le nombre de particules
 
     for (let i = 0; i < particleCount; i++) {
         particles.push({
