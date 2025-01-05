@@ -7,7 +7,7 @@ function createBlood(x, y) {
             x: x + player.size / 2,
             y: y + player.size / 2,
             dx: (Math.random() - 0.5) * 10, // Direction aléatoire
-            dy: (Math.random() - 0.5) * 10,
+            dy: Math.random() * 5 + 2, // Tomber vers le bas
             size: Math.random() * 5 + 2, // Taille variable
             life: Math.random() * 30 + 30 // Durée de vie
         });
