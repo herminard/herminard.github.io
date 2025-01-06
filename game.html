@@ -138,7 +138,8 @@
         const gameState = { score: 0, won: false, collision: false };
 
         let moveInterval = null;
-function drawPlayer() {
+        
+  function drawPlayer() {
     // Draw body
     ctx.fillStyle = 'blue';
     ctx.fillRect(player.x, player.y, player.size, player.size);
@@ -158,9 +159,10 @@ function drawPlayer() {
     ctx.fillStyle = 'black';
     ctx.fill();
 
-    // Draw smile
+    // Draw mouth (expression)
     ctx.beginPath();
-    ctx.arc(headX, headY, 5, 0, Math.PI);
+    // Example: neutral expression
+    ctx.arc(headX, headY + 2, 5, 0, Math.PI, false); // Smile
     ctx.strokeStyle = 'black';
     ctx.stroke();
 
@@ -172,6 +174,9 @@ function drawPlayer() {
     // Draw the box
     ctx.fillStyle = 'brown';
     ctx.fillRect(player.x + player.size, player.y, player.size, player.size);
+
+    // Draw tools
+    drawTool(player.x + player.size + 5, player.y + 5, 'hammer'); // Example tool
 }
      
 
