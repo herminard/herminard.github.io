@@ -1,1 +1,93 @@
+body {
+    margin: 0;
+    background-color: #222;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+}
 
+canvas {
+    border: 2px solid #fff;
+    margin-top: 10px;
+}
+
+#game-controls {
+    position: fixed;
+    bottom: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.button {
+    background-color: #ffcc00;
+    border: 2px solid #fff;
+    color: #fff;
+    font-size: 1.2em;
+    width: 60px;
+    height: 60px;
+    text-align: center;
+    line-height: 60px;
+    border-radius: 10px;
+    user-select: none;
+    touch-action: none;
+}
+
+#score {
+    font-size: 1.2em;
+    position: fixed;
+    top: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+}
+
+#title {
+    font-size: 2em;
+    margin: 20px 0;
+}
+
+#message {
+    font-size: 1.5em;
+    position: absolute;
+    top: 200px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+}
+
+.blood {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background-color: red;
+    border-radius: 50%;
+    animation: blood-drip 1s linear infinite;
+}
+
+@keyframes blood-drip {
+    0% {
+        top: -10px;
+    }
+    100% {
+        top: 30px;
+    }
+}
+
+#trophy {
+    position: absolute;
+    top: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: none;
+    z-index: 10;
+}
+
+#trophy img {
+    width: 100px;
+    height: 100px;
+}
